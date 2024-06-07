@@ -1,44 +1,62 @@
-import NextLogo from './NextLogo'
-import SupabaseLogo from './SupabaseLogo'
+import { Divider } from './Divider'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import Link from 'next/link'
 
 export default function Header() {
   return (
-    <div className="flex flex-col items-center gap-16">
-      <div className="flex items-center justify-center gap-8">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
+    <>
+      <div className="mx-auto hidden h-24 w-full max-w-7xl items-center justify-between gap-x-6 p-6 sm:flex lg:px-8">
+        <a href="/dashboard">
+          <h1 className="relative flex flex-row items-baseline text-2xl font-bold">
+            📚 bookmark
+          </h1>
         </a>
-        <span className="h-6 rotate-45 border-l" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
+        <div className="flex gap-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              {' '}
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>
+                <div className="">
+                  <p className="font-medium">Arvid</p>
+                  <p className="font-light text-gray-500">
+                    arvid.bergman.thorn@cygni.se
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>🧑 Profile</DropdownMenuItem>
+              <Link href={'/billing'}>
+                <DropdownMenuItem>💳 Billing</DropdownMenuItem>
+              </Link>
+              <DropdownMenuItem>🚪 Logout</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="mx-auto max-w-xl text-center text-3xl !leading-tight lg:text-4xl">
-        The fastest way to build apps with{' '}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{' '}
-        and{' '}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
+      <div className="flex items-center gap-x-4"></div>
+      <div className="mx-auto flex h-16 w-full items-center justify-between gap-x-6 p-4 sm:hidden">
+        <a href="/dashboard">
+          <h1 className="relative flex flex-row items-baseline text-2xl font-bold">
+            📚 bookmark
+          </h1>
         </a>
-      </p>
-      <div className="my-8 w-full bg-gradient-to-r from-transparent via-foreground/10 to-transparent p-[1px]" />
-    </div>
+        <div className="flex gap-4"></div>
+      </div>
+      <Divider />
+    </>
   )
 }

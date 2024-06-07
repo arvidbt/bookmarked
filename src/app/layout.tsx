@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import ReactQueryProvider from '@/providers/ReactQueryProvider'
+import Header from '@/components/Header'
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -12,8 +13,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'bookmarked',
+  description: 'Make bookmarking simpler.',
 }
 
 export default function RootLayout({
@@ -32,11 +33,11 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
           disableTransitionOnChange
         >
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">
+              <Header />
               {children}
               <Analytics />{' '}
               {/* ^^ remove this if you are not deploying to vercel. See more at https://vercel.com/docs/analytics  */}

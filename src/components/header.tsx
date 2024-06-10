@@ -1,4 +1,4 @@
-import { Divider } from './Divider'
+import { Divider } from './divider'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -16,7 +16,7 @@ export default function Header() {
       <div className="mx-auto hidden h-24 w-full max-w-7xl items-center justify-between gap-x-6 p-6 sm:flex lg:px-8">
         <a href="/dashboard">
           <h1 className="relative flex flex-row items-baseline text-2xl font-bold">
-            📚 bookmark
+            📚 bookmarked
           </h1>
         </a>
         <div className="flex gap-4">
@@ -51,7 +51,7 @@ export default function Header() {
       <div className="mx-auto flex h-16 w-full items-center justify-between gap-x-6 p-4 sm:hidden">
         <a href="/dashboard">
           <h1 className="relative flex flex-row items-baseline text-2xl font-bold">
-            📚 bookmark
+            📚 bookmarked
           </h1>
         </a>
         <div className="flex gap-4"></div>

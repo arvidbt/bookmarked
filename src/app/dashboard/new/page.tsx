@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
+import { Textarea } from '@/components/ui/textarea'
 import {
   Form,
   FormControl,
@@ -24,29 +25,29 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 
-const FormSchema = z.object({
-  folder: z
-    .string()
-    .min(2, {
-      message: 'Folder must be at least 2 characters.',
-    })
-    .max(20, {
-      message: 'Folder must not be more than 20 characters',
-    }),
-  description: z
-    .string()
-    .max(255, {
-      message: 'Description must not exceed 255 characters',
-    })
-    .optional(),
-  folderVisibility: z.boolean(),
-  folderSize: z.number().nonnegative().min(1, {
-    message: 'Folder must be at least of size 1',
-  }),
-  icon: z.string().emoji().optional(),
-})
-
 export default function InputForm() {
+  const FormSchema = z.object({
+    folder: z
+      .string()
+      .min(2, {
+        message: 'Folder must be at least 2 characters.',
+      })
+      .max(20, {
+        message: 'Folder must not be more than 20 characters',
+      }),
+    description: z
+      .string()
+      .max(255, {
+        message: 'Description must not exceed 255 characters',
+      })
+      .optional(),
+    folderVisibility: z.boolean(),
+    folderSize: z.number().nonnegative().min(1, {
+      message: 'Folder must be at least of size 1',
+    }),
+    icon: z.string().emoji().optional(),
+  })
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -72,7 +73,7 @@ export default function InputForm() {
     <>
       <div className="flex w-full p-4 sm:h-[calc(100vh-6rem-1px)]">
         <div className="mx-auto flex max-w-md flex-col items-center justify-center py-6">
-          <div className="flex grow flex-col items-center justify-center">
+          <div className="flex grow flex-col items-center">
             <div>
               <h1 className="text-2xl font-extrabold">
                 {"Let's create your new folder"}
@@ -84,7 +85,7 @@ export default function InputForm() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="w-full space-y-4"
                 >
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-4 gap-2">
                     <div className="col-span-2">
                       <FormField
                         control={form.control}
@@ -115,29 +116,6 @@ export default function InputForm() {
                         </FormItem>
                       )}
                     />
-                  </div>
-                  <div className="grid grid-cols-4 gap-2">
-                    <div className="col-span-3">
-                      <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>
-                              Description{' '}
-                              <span className="text-gray-500">
-                                {'(optional)'}
-                              </span>
-                            </FormLabel>
-                            <FormControl>
-                              <Input placeholder="Links for..." {...field} />
-                            </FormControl>
-                            <FormDescription></FormDescription>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
                     <FormField
                       control={form.control}
                       name="icon"
@@ -154,12 +132,36 @@ export default function InputForm() {
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <div className="grid grid-cols-4">
+                              <div className="grid grid-cols-4 md:grid-cols-6">
                                 <SelectItem value="📁">📁</SelectItem>
-                                <SelectItem value="😀">😀</SelectItem>
-                                <SelectItem value="🌍">🌍</SelectItem>
-                                <SelectItem value="👽">👽</SelectItem>
-                                <SelectItem value="🛰️">🛰️</SelectItem>
+                                <SelectItem value="📄">📄</SelectItem>
+                                <SelectItem value="📊">📊</SelectItem>
+                                <SelectItem value="📈">📈</SelectItem>
+                                <SelectItem value="📉">📉</SelectItem>
+                                <SelectItem value="📑">📑</SelectItem>
+                                <SelectItem value="🗂️">🗂️</SelectItem>
+                                <SelectItem value="🗃️">🗃️</SelectItem>
+                                <SelectItem value="🗄️">🗄️</SelectItem>
+                                <SelectItem value="📝">📝</SelectItem>
+                                <SelectItem value="🖋️">🖋️</SelectItem>
+                                <SelectItem value="📚">📚</SelectItem>
+                                <SelectItem value="📖">📖</SelectItem>
+                                <SelectItem value="🎓">🎓</SelectItem>
+                                <SelectItem value="🏫">🏫</SelectItem>
+                                <SelectItem value="💼">💼</SelectItem>
+                                <SelectItem value="🛠️">🛠️</SelectItem>
+                                <SelectItem value="💡">💡</SelectItem>
+                                <SelectItem value="🖼️">🖼️</SelectItem>
+                                <SelectItem value="🎨">🎨</SelectItem>
+                                <SelectItem value="🎵">🎵</SelectItem>
+                                <SelectItem value="🎬">🎬</SelectItem>
+                                <SelectItem value="📸">📸</SelectItem>
+                                <SelectItem value="🌐">🌐</SelectItem>
+                                <SelectItem value="🔒">🔒</SelectItem>
+                                <SelectItem value="🧾">🧾</SelectItem>
+                                <SelectItem value="🏠">🏠</SelectItem>
+                                <SelectItem value="🍴">🍴</SelectItem>
+                                <SelectItem value="⚽">⚽</SelectItem>
                               </div>
                             </SelectContent>
                           </Select>
@@ -168,12 +170,34 @@ export default function InputForm() {
                       )}
                     />
                   </div>
+
+                  <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Description{' '}
+                          <span className="text-gray-500">{'(optional)'}</span>
+                        </FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="A brief description about your folder"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
                   <div>
                     <FormField
                       control={form.control}
                       name="folderVisibility"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between gap-4 rounded-lg border p-4">
+                        <FormItem className="flex flex-row items-center justify-between gap-4 rounded-lg border p-4 ">
                           <div className="space-y-0.5">
                             <FormLabel className="text-base">
                               Is your folder public?

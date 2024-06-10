@@ -1,4 +1,4 @@
-import { BookmarkFolder } from '@/components/BookmarkFolder'
+import { BookmarkFolder } from '@/components/bookmark-folder'
 import Link from 'next/link'
 
 export default async function Dashboard() {
@@ -39,7 +39,7 @@ export default async function Dashboard() {
               userQuota={1000}
               bucketQuota={100}
               publicFolder={false}
-              tags={['Free', 'Shared Quota']}
+              tags={['Free', 'Shared Quota', 'Private']}
             />
             <BookmarkFolder
               title="Jobbet"
@@ -48,7 +48,7 @@ export default async function Dashboard() {
               userQuota={1000}
               bucketQuota={700}
               publicFolder={false}
-              tags={['Free', 'Shared Quota']}
+              tags={['Free', 'Shared Quota', 'Private']}
             />
             <BookmarkFolder
               title="Fritid"

@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+
 import Link from 'next/link'
 import { Progress } from './ui/progress'
 import { useEffect, useState } from 'react'
@@ -48,13 +49,13 @@ export const BookmarkFolder = ({
 
   const [progress, setProgress] = useState(0)
   useEffect(() => {
-    const timer = setTimeout(() => setProgress(quotaUsedPercentage), 500)
+    const timer = setTimeout(() => setProgress(quotaUsedPercentage), 200)
     return () => clearTimeout(timer)
   }, [quotaUsedPercentage])
 
   return (
     <>
-      <Link href={'/dashboard'}>
+      <Link href={`/folder/${encodeURIComponent(title.toLowerCase())}`}>
         <Card className=" hover:bg-red-50/20">
           <CardHeader>
             <CardTitle className="flex justify-between">
@@ -62,7 +63,7 @@ export const BookmarkFolder = ({
                 {icon ? icon : '📁'}&nbsp;
                 {title}
               </div>
-              <div>{publicFolder ? '🔓' : '🔒'}</div>
+              <div>{publicFolder ? <div>{'🔓'}</div> : '🔒'}</div>
             </CardTitle>
             <Progress value={progress} className="" />
             <CardDescription>

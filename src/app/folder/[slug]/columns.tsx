@@ -44,13 +44,13 @@ export const columns: ColumnDef<DatatableUrl>[] = [
       const value = z.string().url().parse(row.getValue('url'))
 
       return (
-        <div className="flex justify-between">
+        <div className="flex items-center justify-between">
           <Link href={value} target="_blank">
-            <div className="max-w-lgtruncate text-left font-medium">
+            <div className="max-w-sm items-center justify-center truncate text-left font-medium decoration-red-500 decoration-2 underline-offset-4 hover:underline">
               {value}
             </div>
           </Link>
-          <CopyButton value={value} />
+          <CopyButton value={value} text="📋" />
         </div>
       )
     },
@@ -76,7 +76,7 @@ export const columns: ColumnDef<DatatableUrl>[] = [
   },
   {
     accessorKey: 'id',
-    header: () => <div className="text-right font-medium"></div>,
+    header: () => <div className="rounded-lg text-right font-medium"></div>,
     cell: ({ row }) => {
       return (
         <div className="text-right">
@@ -94,6 +94,8 @@ export const columns: ColumnDef<DatatableUrl>[] = [
               >
                 📋 Copy URL
               </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>✍️ Edit URL</DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>🚨 Delete URL</DropdownMenuItem>
             </DropdownMenuContent>

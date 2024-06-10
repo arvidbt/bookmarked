@@ -1,9 +1,14 @@
-type FolderProps = {
-  title: string
-}
-
+import { AddUrl } from '@/components/add-url'
 import { DatatableUrl, columns } from './columns'
 import { DataTable } from './data-table'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 async function getData(): Promise<DatatableUrl[]> {
   // Fetch data from your API here.
@@ -38,35 +43,82 @@ export default async function DemoPage({
 
   return (
     <>
-      <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
-        <div className="mx-auto flex max-w-7xl grow flex-col py-6">
-          <div className="flex w-full flex-col items-center justify-between gap-4 px-6 md:flex-row">
-            <div>
-              <h2 className="text-2xl font-bold">Your URLs</h2>
+      {data.length > 0 ? (
+        // If there is data, rended datatable
+        <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
+          <div className="mx-auto flex max-w-7xl grow flex-col py-6">
+            <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
+              <div>
+                <h2 className="text-2xl font-bold">Your URLs</h2>
+              </div>
+
+              <Dialog>
+                <DialogTrigger>
+                  <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      className="aspect-square h-4"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                      ></path>
+                    </svg>
+                    <span className="hidden text-sm font-medium lg:block">
+                      Add a new URL
+                    </span>
+                  </span>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Add new URL entry</DialogTitle>
+                  </DialogHeader>
+                  <AddUrl />
+                </DialogContent>
+              </Dialog>
             </div>
-            <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-                className="aspect-square h-4"
-              >
-                <path
-                  fill="currentColor"
-                  d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
-                ></path>
-              </svg>
-              <span className="hidden text-sm font-medium lg:block">
-                Add a new URL
-              </span>
-            </span>
-          </div>
-          <div className="flex grow flex-col">
-            <div className="container mx-auto p-4">
-              <DataTable columns={columns} data={data} />
+            <div className="flex grow flex-col">
+              <div className="p-4">
+                <DataTable columns={columns} data={data} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        // If no data, prompt to add.
+        <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
+          <div className="mx-auto flex max-w-7xl grow flex-col py-6">
+            <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
+              <div className="flex h-full flex-col">
+                <div>
+                  <h2 className="text-xl font-extrabold">
+                    🎉 Congratulations to your new folder!
+                  </h2>
+                  <p className="font-medium text-gray-500">
+                    Start adding your URLs
+                  </p>
+                </div>
+              </div>
+              <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 448 512"
+                  className="aspect-square h-4"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32v144H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h144v144c0 17.7 14.3 32 32 32s32-14.3 32-32V288h144c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+                  ></path>
+                </svg>
+                <span className="hidden text-sm font-medium lg:block">
+                  Add your first URL
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

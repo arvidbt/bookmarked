@@ -55,7 +55,10 @@ export default function Billing() {
                           <h2 className="flex items-baseline gap-1 text-base font-medium sm:text-lg">
                             1000 URLs
                           </h2>
-                          <button className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                          <button
+                            disabled
+                            className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-xs font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                          >
                             Current plan
                           </button>
                         </div>
@@ -64,7 +67,33 @@ export default function Billing() {
                         </p>
                         <ul className="text-xs text-muted-foreground sm:text-sm">
                           <li>- 1000 URLs *</li>
-                          <li>- (Probably) cheaper than a cup of coffee</li>
+                          <li>- Follow 2 public folders</li>
+                          <div className="mt-2">
+                            <li className="text-xs text-muted-foreground">
+                              * Storage shared between all apps
+                            </li>
+                          </div>
+                        </ul>
+                      </div>
+                      <div className="flex flex-col items-start gap-2">
+                        <div className="flex w-full items-center justify-between ">
+                          <h2 className="flex items-baseline gap-1 text-base font-medium sm:text-lg">
+                            5000 URLs
+                          </h2>
+                          <button className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-xs font-medium text-red-600 shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                            Switch plan
+                          </button>
+                        </div>
+                        <p className="text-xs sm:text-sm">
+                          When you want that extra.
+                        </p>
+                        <ul className="text-xs text-muted-foreground sm:text-sm">
+                          <li>- 20000 URLs *</li>
+                          <li>- Public folders</li>
+                          <li>- Password protected folders</li>
+                          <li>- Dark theme</li>
+                          <li>- Bulk upload from browsers</li>
+                          <li>- Follow unlimited public folders</li>
                           <div className="mt-2">
                             <li className="text-xs text-muted-foreground">
                               * Storage shared between all apps

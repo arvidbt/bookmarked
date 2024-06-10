@@ -30,12 +30,8 @@ export default function RootLayout({
       style={{ colorScheme: 'dark' }}
     >
       <body className="bg-background text-foreground">
-        <NextTopLoader showSpinner={false} height={2} color="#2acf80" />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
+        <NextTopLoader showSpinner={false} height={4} color="#2acf80" />
+        <ThemeProvider attribute="class" disableTransitionOnChange>
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">
               <Header />

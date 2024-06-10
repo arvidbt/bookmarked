@@ -3,21 +3,23 @@ import { Button } from '@/components/ui/button'
 
 type Props = {
   value: string
+  text: string
 }
 
-export const CopyButton = ({ value }: Props) => {
+export const CopyButton = ({ value, text }: Props) => {
   const { toast } = useToast()
   return (
     <Button
-      className="bg-transparent hover:bg-transparent"
+      className="inline-block rounded-lg"
+      variant="ghost"
       onClick={() => {
         toast({
-          title: `Copied URL: ${value}`,
+          title: `Copied URL ✅`,
         })
         navigator.clipboard.writeText(value)
       }}
     >
-      📋
+      {text}
     </Button>
   )
 }

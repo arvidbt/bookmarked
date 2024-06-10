@@ -15,6 +15,7 @@ import { Progress } from './ui/progress'
 import { useEffect, useState } from 'react'
 
 const BookmarkFolderSchema = z.object({
+  id: z.string().uuid(),
   title: z.string().max(20),
   icon: z.string().emoji().optional(),
   usedQuota: z.number().nonnegative(),
@@ -36,6 +37,7 @@ function calculatePercentage(part: number, total: number): number {
 }
 
 export const BookmarkFolder = ({
+  id,
   title,
   icon,
   usedQuota,
@@ -55,7 +57,7 @@ export const BookmarkFolder = ({
 
   return (
     <>
-      <Link href={`/folder/${encodeURIComponent(title.toLowerCase())}`}>
+      <Link href={`/folder/${encodeURIComponent(id)}`}>
         <Card className=" hover:bg-red-50/20">
           <CardHeader>
             <CardTitle className="flex justify-between">

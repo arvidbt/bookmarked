@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { randomUUID } from 'crypto'
 
 export default async function Dashboard() {
   return (
@@ -43,6 +44,7 @@ export default async function Dashboard() {
           </div>
           <ul className="flex w-full flex-col items-center justify-center gap-2 overflow-y-auto p-6 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
             <BookmarkFolder
+              id={randomUUID()}
               title="Hemmet"
               usedQuota={0}
               userQuota={1000}
@@ -51,6 +53,7 @@ export default async function Dashboard() {
               tags={['Free', 'Shared Quota', 'Private']}
             />
             <BookmarkFolder
+              id={randomUUID()}
               title="Jobbet"
               icon="🗃️"
               usedQuota={321}
@@ -60,6 +63,7 @@ export default async function Dashboard() {
               tags={['Free', 'Shared Quota', 'Private']}
             />
             <BookmarkFolder
+              id={randomUUID()}
               title="Fritid"
               icon="🎮"
               usedQuota={13}

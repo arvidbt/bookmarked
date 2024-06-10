@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { CopyButton } from '@/components/copy-button'
 
 async function getData(): Promise<DatatableUrl[]> {
   // Fetch data from your API here.
@@ -50,6 +51,9 @@ export default async function DemoPage({
             <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
               <div>
                 <h2 className="text-2xl font-bold">Your URLs</h2>
+                <p className="font-medium text-gray-500">
+                  Folder ID: <span className="text-black">{params.slug}</span>
+                </p>
               </div>
 
               <Dialog>
@@ -96,7 +100,10 @@ export default async function DemoPage({
                     🎉 Congratulations to your new folder!
                   </h2>
                   <p className="font-medium text-gray-500">
-                    Start adding your URLs
+                    Folder ID:{' '}
+                    <span className="text-black">
+                      6415acff-fa74-4807-b421-fa51da067970
+                    </span>
                   </p>
                 </div>
               </div>

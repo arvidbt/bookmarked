@@ -14,7 +14,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'bookmarked',
+  title: 'foldrr',
   description: 'Make bookmarking simpler.',
 }
 
@@ -30,7 +30,7 @@ export default function RootLayout({
       style={{ colorScheme: 'dark' }}
     >
       <body className="bg-background text-foreground">
-        <NextTopLoader showSpinner={false} height={4} color="#2acf80" />
+        <NextTopLoader showSpinner={false} height={4} color="#FF0000" />
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">

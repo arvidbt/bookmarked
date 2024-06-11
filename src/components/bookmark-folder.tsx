@@ -57,8 +57,8 @@ export const BookmarkFolder = ({
 
   return (
     <>
-      <Link href={`/folder/${encodeURIComponent(id)}`}>
-        <Card className=" hover:bg-red-50/20">
+      <Link href={`/folder/${encodeURIComponent(id)}`} className="h-full">
+        <Card className="flex h-full flex-col justify-between hover:bg-red-50/20">
           <CardHeader>
             <CardTitle className="flex justify-between">
               <div>
@@ -78,17 +78,23 @@ export const BookmarkFolder = ({
               </span>
             </CardDescription>
           </CardHeader>
-          <CardContent>{description && <p>{description}</p>}</CardContent>
-          <CardFooter className="gap-2">
-            {tags &&
-              tags.map((t) => (
-                <div
-                  className="rounded-lg bg-red-100 p-1 px-2 text-sm font-semibold text-red-800"
-                  key={t}
-                >
-                  {t}
-                </div>
-              ))}
+          <CardContent>
+            {description && (
+              <p className="font-medium text-gray-500 ">{description}</p>
+            )}
+          </CardContent>
+          <CardFooter>
+            <div className="inset-x-0  flex h-full grow gap-2">
+              {tags &&
+                tags.map((t) => (
+                  <div
+                    className="rounded-lg bg-red-100 p-1 px-2 text-sm font-semibold text-red-800"
+                    key={t}
+                  >
+                    {t}
+                  </div>
+                ))}
+            </div>
           </CardFooter>
         </Card>
       </Link>

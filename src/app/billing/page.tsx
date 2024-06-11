@@ -89,7 +89,7 @@ export default function Billing() {
                         </p>
                         <ul className="text-xs text-muted-foreground sm:text-sm">
                           <li>- 20000 URLs *</li>
-                          <li>- Public folders</li>
+                          <li>- Public folders with access control</li>
                           <li>- Password protected folders</li>
                           <li>- Dark theme</li>
                           <li>- Bulk upload from browsers</li>

@@ -1,4 +1,4 @@
-import { AddUrl } from '@/components/add-url'
+import { AddUrlModal } from '@/components/add-url-modal'
 import { DatatableUrl, columns } from './columns'
 import { DataTable } from './data-table'
 import {
@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { CopyButton } from '@/components/copy-button'
 
 async function getData(): Promise<DatatableUrl[]> {
   // Fetch data from your API here.
@@ -30,7 +29,7 @@ async function getData(): Promise<DatatableUrl[]> {
       id: '728ed52f',
       title: 'Emojipedia',
       url: 'https://emojipedia.org/',
-      tags: ['Emojis', 'Vidar', 'Vill', 'Till', 'Portugal'],
+      tags: ['Emojis'],
     },
   ]
 }
@@ -50,7 +49,7 @@ export default async function DemoPage({
           <div className="mx-auto flex max-w-7xl grow flex-col py-6">
             <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
               <div>
-                <h2 className="text-2xl font-bold">Your URLs</h2>
+                <h2 className="text-2xl font-bold">Your Bookmarks</h2>
                 <p className="font-medium text-gray-500">
                   Folder ID: <span className="text-black">{params.slug}</span>
                 </p>
@@ -78,7 +77,7 @@ export default async function DemoPage({
                   <DialogHeader>
                     <DialogTitle>Add new URL entry</DialogTitle>
                   </DialogHeader>
-                  <AddUrl />
+                  <AddUrlModal />
                 </DialogContent>
               </Dialog>
             </div>

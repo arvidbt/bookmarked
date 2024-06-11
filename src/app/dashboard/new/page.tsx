@@ -46,6 +46,16 @@ export default function InputForm() {
       message: 'Folder must be at least of size 1',
     }),
     icon: z.string().emoji().optional(),
+    passwordProtected: z.object({
+      protected: z.boolean(),
+      password: z
+        .string()
+        .min(12, {
+          message: 'Password needs to be at least 12 characters long',
+        })
+        .max(12, { message: 'Password must not exceed 12 characters long' })
+        .optional(),
+    }),
   })
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -55,6 +65,9 @@ export default function InputForm() {
       folderVisibility: false,
       folderSize: 100,
       icon: '📁',
+      passwordProtected: {
+        protected: false,
+      },
     },
   })
 
@@ -191,13 +204,39 @@ export default function InputForm() {
                       </FormItem>
                     )}
                   />
+                  {/* <div>
+                    <FormField
+                      control={form.control}
+                      name="passwordProtected"
+                      render={({ field }) => (
+                        <FormItem className="items-center justify-between gap-4 rounded-lg border p-4 ">
+                          <div className="space-y-0.5">
+                            <FormLabel className="text-base">
+                              Want to protected your folder with a password?
+                            </FormLabel>
+                            <FormDescription>
+                              A password protected folder can improve your
+                              privacy and further protect your links.
+                            </FormDescription>
+                          </div>
+                          <FormControl>
+                            <Switch
+                              checked={field.value.protected}
+                              onCheckedChange={field.onChange}
+                              aria-readonly
+                            />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div> */}
 
                   <div>
                     <FormField
                       control={form.control}
                       name="folderVisibility"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between gap-4 rounded-lg border p-4 ">
+                        <FormItem className="flex flex-row items-center justify-between gap-4 rounded-lg border p-4">
                           <div className="space-y-0.5">
                             <FormLabel className="text-base">
                               Is your folder public?

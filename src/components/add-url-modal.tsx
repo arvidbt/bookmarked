@@ -26,7 +26,7 @@ const FormSchema = z.object({
   tags: z.string().optional(),
 })
 
-export function AddUrl() {
+export function AddUrlModal() {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {

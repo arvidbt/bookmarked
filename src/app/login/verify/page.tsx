@@ -3,7 +3,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from '@/components/ui/input-otp'
 import {
   Form,
   FormControl,
@@ -13,29 +17,31 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { navigate } from '@/server/actions/navigate'
 import { toast } from '@/components/ui/use-toast'
-import { signInWithOtp } from '@/server/actions/sign-in-with-otp'
+import { Button } from '@/components/ui/button'
 
 const FormSchema = z.object({
-  email: z.string().email(),
+  pin: z.string().min(6, {
+    message: 'Your one-time password must be 6 characters.',
+  }),
 })
 
 export default function Login() {
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    signInWithOtp(data.email)
     toast({
-      title: 'A email is heading your way! 📫',
+      title: 'You submitted the following values:',
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
     })
-    navigate('/login/verify')
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: '',
+      pin: '',
     },
   })
 
@@ -51,8 +57,8 @@ export default function Login() {
                     📚 Foldrr
                   </h1>
                 </a>
-                <h2 className="text-xl font-black">Sign In</h2>
-                <p className="pb-4 font-medium text-gray-500">
+                <h2 className="text-xl font-black">Verify your email</h2>
+                <p className="font-medium text-gray-500">
                   to continue to <span className="font-bold">Foldrr</span>
                 </p>
               </div>
@@ -61,26 +67,44 @@ export default function Login() {
                   <form onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField
                       control={form.control}
-                      name="email"
+                      name="pin"
                       render={({ field }) => (
                         <FormItem className="flex w-full flex-col items-center justify-center">
                           {/* <FormLabel>One-Time Password</FormLabel> */}
                           <FormControl>
-                            <Input placeholder="example@mail.com" {...field} />
+                            <InputOTP maxLength={6} {...field}>
+                              <InputOTPGroup>
+                                <InputOTPSlot index={0} />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                              </InputOTPGroup>
+                            </InputOTP>
                           </FormControl>
                           <FormDescription>
-                            If the mail does not show up, check your junkmail.
+                            Please enter the one-time password sent to your
+                            email.
                           </FormDescription>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button
-                      type="submit"
-                      className="mt-10 w-full rounded-lg bg-red-600 p-2 px-4 font-black text-white hover:bg-red-500"
-                    >
-                      Send me a one-time password!
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button
+                        type="submit"
+                        className="mt-10 w-1/3 rounded-lg bg-red-300 p-2 px-4 font-black text-white hover:bg-red-500"
+                      >
+                        Resend
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="mt-10 w-2/3 rounded-lg bg-red-600 p-2 px-4 font-black text-white hover:bg-red-500"
+                      >
+                        Verify
+                      </Button>
+                    </div>
                   </form>
                 </Form>
               </div>

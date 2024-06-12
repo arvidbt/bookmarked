@@ -1,5 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createMiddlewareClient } from '@/utils/supabase'
+import { useGetUser } from './hooks/use-get-user'
+import { redirect } from 'next/navigation'
 
 export async function middleware(request: NextRequest) {
   try {

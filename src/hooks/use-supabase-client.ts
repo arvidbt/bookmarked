@@ -1,8 +1,8 @@
 import { createBrowserClient } from '@/utils/supabase'
 import { useMemo } from 'react'
 
-function useSupabase() {
+function useSupabaseClient() {
   return useMemo(createBrowserClient, [])
 }
 
-export default useSupabase
+export default useSupabaseClient

@@ -77,3 +77,17 @@ export const createMiddlewareClient = (request: NextRequest) => {
 
   return { supabase, response }
 }
+
+export async function updateSession(request: NextRequest) {
+  let response = NextResponse.next({
+    request: {
+      headers: request.headers,
+    },
+  })
+
+  const middleware = createMiddlewareClient(request)
+
+  await middleware.supabase.auth.getUser()
+
+  return response
+}

@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 const VerifyOTPSchema = z.object({
   email: z.string().email(),
-  token: z.number().min(6).max(6),
+  token: z.string().min(6).max(6),
 })
 
 type Props = z.infer<typeof VerifyOTPSchema>
@@ -19,7 +19,7 @@ export async function verifyOTP({ email, token }: Props) {
     error,
   } = await supabase.auth.verifyOtp({
     email,
-    token: token.toString(),
+    token: token,
     type: 'email',
   })
 }

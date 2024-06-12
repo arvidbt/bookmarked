@@ -1,6 +1,6 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { User } from '@supabase/supabase-js'
-import { signInWithOtp } from '@/server/actions/sign-in-with-otp'
+import { signInWithOtp } from '@/lib/actions/sign-in-with-otp'
 
 export function useSignIn(email: string): UseQueryResult<User | null, Error> {
   return useQuery({

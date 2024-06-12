@@ -1,16 +1,11 @@
 import { BookmarkFolder } from '@/components/bookmark-folder'
 import { FollowFolderModal } from '@/components/follow-folder-modal'
 import Link from 'next/link'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { randomUUID } from 'crypto'
 import { z } from 'zod'
+import useSupabaseServer from '@/hooks/use-supabase-server'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 const FolderSchema = z.object({
   id: z.string().uuid(),
@@ -67,7 +62,13 @@ export default async function Dashboard() {
   // Get user folders
   // Get user followed folders
 
-  const data = await getData()
+  const supabase = useSupabaseServer(cookies())
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect('/') // NEXT_DIRECT error
+  }
+
+  const mockedData = await getData()
 
   return (
     <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
@@ -100,7 +101,8 @@ export default async function Dashboard() {
             </Link>
           </div>
           <ul className="flex  w-full flex-col items-center justify-center gap-2 overflow-y-auto p-6 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
-            {data && data.map((f) => <BookmarkFolder key={f.id} {...f} />)}
+            {mockedData &&
+              mockedData.map((f) => <BookmarkFolder key={f.id} {...f} />)}
           </ul>
           <div className="flex w-full items-center justify-between gap-4 px-6 py-6 md:flex-row">
             <div>

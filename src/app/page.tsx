@@ -1,13 +1,10 @@
 export default async function Index() {
   return (
     <div className="flex h-screen w-full flex-1 flex-col items-center justify-center">
-      <div className="relative px-6 py-14 lg:px-8">
+      {/* <div className="relative px-6 py-14 lg:px-8">
         <h1 className="w-full rounded-2xl bg-red-500 px-12 py-4  text-6xl font-black text-white">
           Effortless bookmarking
         </h1>
-        {/* <h1 className="text-4xl font-black">
-          for the modern user. <br />
-        </h1> */}
         <h1 className="py-1 text-4xl font-black">
           Bookmark, Share and Follow.
         </h1>
@@ -25,7 +22,7 @@ export default async function Index() {
             </a>
           </p>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -13,6 +13,7 @@ import {
 import Link from 'next/link'
 import { Progress } from './ui/progress'
 import { useEffect, useState } from 'react'
+import { urlPaths } from '@/utils/paths'
 
 const BookmarkFolderSchema = z.object({
   id: z.string().uuid(),
@@ -57,7 +58,10 @@ export const BookmarkFolder = ({
 
   return (
     <>
-      <Link href={`/folder/${encodeURIComponent(id)}`} className="h-full">
+      <Link
+        href={`${urlPaths.FOLDER}${encodeURIComponent(id)}`}
+        className="h-full"
+      >
         <Card className="flex h-full flex-col justify-between hover:bg-red-50/20">
           <CardHeader>
             <CardTitle className="flex justify-between">

@@ -16,7 +16,6 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
-import { randomUUID } from 'crypto'
 
 const FormSchema = z.object({
   title: z.string().min(2, {

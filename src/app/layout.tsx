@@ -7,16 +7,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import ReactQueryProvider from '@/providers/ReactQueryProvider'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/toaster'
+import { pageMetadata } from '@/utils/metadata'
 
-const defaultUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000'
-
-export const metadata = {
-  metadataBase: new URL(defaultUrl),
-  title: 'foldrr',
-  description: 'Make bookmarking simpler.',
-}
+export const metadata = { ...pageMetadata }
 
 export default function RootLayout({
   children,

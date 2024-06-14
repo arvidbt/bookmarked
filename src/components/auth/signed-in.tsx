@@ -1,3 +1,5 @@
+'use client'
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -10,18 +12,18 @@ import {
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import Link from 'next/link'
 import { useGetUser } from '@/hooks/use-get-user'
-import { usePathname } from 'next/navigation'
 import { useToast } from '../ui/use-toast'
 import { useMutation } from '@tanstack/react-query'
 import { signOut } from '@/lib/actions/sign-out-user'
 import { revalidatePath } from 'next/cache'
-import { navigate } from '@/lib/actions/navigate'
 import { ProfileModal } from '../profile-modal'
+import { urlPaths } from '@/utils/paths'
+import { useRouter } from 'next/navigation'
 
 export function SignedIn() {
-  const { data, isFetching, isLoading, isSuccess } = useGetUser()
-  const url = usePathname()
+  const { data } = useGetUser()
   const { toast } = useToast()
+  const router = useRouter()
 
   const signOutMutation = useMutation({
     mutationFn: () => {
@@ -32,8 +34,8 @@ export function SignedIn() {
       toast({
         title: `Signed out`,
       })
-      revalidatePath('/')
-      navigate('/')
+      revalidatePath(urlPaths.HOME)
+      router.push(urlPaths.HOME)
     },
   })
 
@@ -61,7 +63,7 @@ export function SignedIn() {
               <DropdownMenuItem>🧑 Profile</DropdownMenuItem>
             </DialogTrigger>
 
-            <Link href={'/billing'}>
+            <Link href={urlPaths.BILLING}>
               <DropdownMenuItem>💳 Billing</DropdownMenuItem>
             </Link>
             <DropdownMenuItem onClick={() => signOutMutation.mutate()}>

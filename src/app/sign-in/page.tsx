@@ -39,7 +39,7 @@ type AuthCredentials = {
   token: string
 }
 
-export default function Login() {
+export default function SignIn() {
   const [email, setEmail] = useState<string>()
   const { toast } = useToast()
 

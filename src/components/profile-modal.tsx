@@ -27,6 +27,7 @@ import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar'
 import Link from 'next/link'
+import { urlPaths } from '@/utils/paths'
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -74,7 +75,7 @@ export function ProfileModal() {
             <p>
               <span className="font-medium">Current plan:</span> Free
             </p>
-            <Link href={'/billing'} className="border p-2">
+            <Link href={urlPaths.BILLING} className="border p-2">
               Upgrade plan
             </Link>
           </div>

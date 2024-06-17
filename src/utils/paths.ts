@@ -6,4 +6,5 @@ export const urlPaths = {
   PRICING: '/pricing',
   BILLING: '/billing',
   FOLDER: '/folder/',
+  NEW_FOLDER: `/dashboard/new`,
 }

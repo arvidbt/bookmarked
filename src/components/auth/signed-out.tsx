@@ -10,16 +10,9 @@ export function SignedOut() {
 
   return data?.id ? null : (
     <>
-      <div className="flex gap-10">
-        <h2 className="text-sm font-semibold text-gray-900 hover:underline">
-          About
-        </h2>
-        <h2 className="text-sm font-semibold text-gray-900 hover:underline">
-          Pricing
-        </h2>
-      </div>
+      <div className="flex gap-10"></div>
       <a
-        className="rounded-lg bg-green-600 p-2 px-4 font-medium text-white hover:bg-green-500"
+        className="rounded-lg bg-gray-200 p-3 px-8 text-sm font-medium hover:bg-gray-300"
         href={urlPaths.LOGIN}
       >
         Sign In

@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { Progress } from './ui/progress'
 import { useEffect, useState } from 'react'
 import { urlPaths } from '@/utils/paths'
+import { cn } from '@/utils/tailwind'
 
 const BookmarkFolderSchema = z.object({
   id: z.string().uuid(),
@@ -62,7 +63,7 @@ export const BookmarkFolder = ({
         href={`${urlPaths.FOLDER}${encodeURIComponent(id)}`}
         className="h-full"
       >
-        <Card className="flex h-full flex-col justify-between hover:bg-red-50/20">
+        <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-green-50/30">
           <CardHeader>
             <CardTitle className="flex justify-between">
               <div>
@@ -92,7 +93,7 @@ export const BookmarkFolder = ({
               {tags &&
                 tags.map((t) => (
                   <div
-                    className="rounded-lg bg-red-100 p-1 px-2 text-sm font-semibold text-red-800"
+                    className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
                     key={t}
                   >
                     {t}

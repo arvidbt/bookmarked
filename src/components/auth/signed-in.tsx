@@ -14,16 +14,15 @@ import Link from 'next/link'
 import { useGetUser } from '@/hooks/use-get-user'
 import { useToast } from '../ui/use-toast'
 import { useMutation } from '@tanstack/react-query'
-import { signOut } from '@/lib/actions/sign-out-user'
+import { signOut } from '@/lib/auth/sign-out-user'
 import { revalidatePath } from 'next/cache'
 import { ProfileModal } from '../profile-modal'
 import { urlPaths } from '@/utils/paths'
-import { useRouter } from 'next/navigation'
+import { NextResponse } from 'next/server'
 
 export function SignedIn() {
   const { data } = useGetUser()
   const { toast } = useToast()
-  const router = useRouter()
 
   const signOutMutation = useMutation({
     mutationFn: () => {
@@ -34,8 +33,8 @@ export function SignedIn() {
       toast({
         title: `Signed out`,
       })
-      revalidatePath(urlPaths.HOME)
-      router.push(urlPaths.HOME)
+      revalidatePath(urlPaths.LOGIN, 'page')
+      return NextResponse.redirect(new URL(urlPaths.LOGIN))
     },
   })
 

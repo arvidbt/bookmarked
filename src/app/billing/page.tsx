@@ -1,4 +1,15 @@
-export default function Billing() {
+import useSupabaseServer from '@/hooks/use-supabase-server'
+import { urlPaths } from '@/utils/paths'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+
+export default async function Billing() {
+  const supabase = useSupabaseServer(cookies())
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect(urlPaths.HOME)
+  }
+
   return (
     <>
       <div className="flex sm:h-[calc(100vh-6rem-1px)]">
@@ -80,7 +91,7 @@ export default function Billing() {
                           <h2 className="flex items-baseline gap-1 text-base font-medium sm:text-lg">
                             5000 URLs
                           </h2>
-                          <button className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-xs font-medium text-red-600 shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
+                          <button className="inline-flex h-8 items-center justify-center rounded-md border border-input bg-background px-3 text-xs font-medium text-green-600 shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground hover:text-red-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50">
                             Switch plan
                           </button>
                         </div>

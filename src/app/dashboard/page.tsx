@@ -3,8 +3,11 @@ import { FollowFolderModal } from '@/components/follow-folder-modal'
 import Link from 'next/link'
 import { randomUUID } from 'crypto'
 import { z } from 'zod'
+import { urlPaths } from '@/utils/paths'
 import useSupabaseServer from '@/hooks/use-supabase-server'
 import { cookies } from 'next/headers'
+import { revalidatePath } from 'next/cache'
+import { NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
 
 const FolderSchema = z.object({
@@ -26,33 +29,33 @@ async function getData(): Promise<Folder[]> {
   return [
     {
       id: randomUUID(),
-      title: 'Hemmet',
+      title: 'Home',
       usedQuota: 0,
       userQuota: 1000,
       bucketQuota: 100,
       description: 'Some links for stuff I want to buy for my home',
       publicFolder: false,
-      tags: ['Free', 'Shared Quota', 'Private'],
+      tags: ['Private'],
     },
     {
       id: randomUUID(),
-      title: 'Jobbet',
+      title: 'Work stuff',
       icon: '🗃️',
       usedQuota: 321,
       userQuota: 1000,
       bucketQuota: 700,
       publicFolder: false,
-      tags: ['Free', 'Shared Quota', 'Private'],
+      tags: ['Private'],
     },
     {
       id: randomUUID(),
-      title: 'Hemmet',
+      title: 'Games I want to play',
       icon: '🎮',
       usedQuota: 13,
       userQuota: 1000,
       bucketQuota: 200,
-      publicFolder: false,
-      tags: ['Free', 'Shared Quota', 'Private'],
+      publicFolder: true,
+      tags: ['Public'],
     },
   ]
 }
@@ -65,7 +68,8 @@ export default async function Dashboard() {
   const supabase = useSupabaseServer(cookies())
   const { data, error } = await supabase.auth.getUser()
   if (error || !data?.user) {
-    redirect('/') // NEXT_DIRECT error
+    revalidatePath(urlPaths.LOGIN, 'page')
+    return redirect(urlPaths.LOGIN)
   }
 
   const mockedData = await getData()
@@ -82,8 +86,8 @@ export default async function Dashboard() {
               </p>
             </div>
 
-            <Link href={'/dashboard/new'}>
-              <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white hover:bg-red-500">
+            <Link href={urlPaths.NEW_FOLDER}>
+              <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"

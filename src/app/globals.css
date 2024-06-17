@@ -35,3 +35,109 @@
     @apply bg-background text-foreground;
   }
 }
+
+.rotating-list {
+  padding: 0;
+  margin: 0;
+  height: 1.2em; /* Adjust based on the height of your list items */
+  overflow: hidden;
+  position: relative;
+}
+
+.rotating-list li {
+  height: 1.5em; /* Same as above */
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  opacity: 0; /* Initially hide the list items */
+  animation: slide 10s infinite;
+}
+
+@keyframes slide {
+  0% {
+    top: 1.5em; /* Below the visible area */
+    opacity: 0;
+  }
+  10% {
+    top: 0; /* Slide into the visible area */
+    opacity: 1;
+    animation-timing-function: ease-out; /* Ease out when sliding in */
+  }
+  20% {
+    top: 0; /* Pause */
+    opacity: 1;
+  }
+  30% {
+    top: -1.5em; /* Slide out of the visible area */
+    opacity: 0;
+    animation-timing-function: ease-in; /* Ease in when sliding out */
+  }
+  100% {
+    top: -1.5em; /* Remain out of the visible area */
+    opacity: 0;
+  }
+}
+
+.rotating-list li:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.rotating-list li:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.rotating-list li:nth-child(3) {
+  animation-delay: 4s;
+}
+
+.rotating-list li:nth-child(4) {
+  animation-delay: 6s;
+}
+
+.rotating-list li:nth-child(5) {
+  animation-delay: 8s;
+}
+
+.wavy {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 10px ), repeating-linear-gradient( #16A34A, #14532D );
+}
+
+.rhombus {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  linear-gradient(135deg, #16A34A 25%, transparent 25%), linear-gradient(225deg, #16A34A 25%, transparent 25%), linear-gradient(45deg, #16A34A 25%, transparent 25%), linear-gradient(315deg, #16A34A 25%, #e5e5f7 25%);
+  background-position:  10px 0, 10px 0, 0 0, 0 0;
+  background-size: 10px 10px;
+  background-repeat: repeat;
+}
+
+.zigzag {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image:  linear-gradient(135deg, #16A34A 25%, transparent 25%), linear-gradient(225deg, #16A34A 25%, transparent 25%), linear-gradient(45deg, #16A34A 25%, transparent 25%), linear-gradient(315deg, #16A34A 25%, #e5e5f7 25%);
+  background-position:  10px 0, 10px 0, 0 0, 0 0;
+  background-size: 20px 20px;
+  background-repeat: repeat;
+}
+
+.zigzag3d {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background: linear-gradient(135deg, #16A34A55 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #16A34A 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #16A34A55 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #16A34A 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
+}
+
+.moon {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: radial-gradient( ellipse farthest-corner at 10px 10px , #16A34A, #16A34A 50%, #e5e5f7 50%);
+  background-size: 10px 10px;
+}
+
+.circles {
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: radial-gradient(circle at center center, #16A34A, #e5e5f7), repeating-radial-gradient(circle at center center, #16A34A, #16A34A, 10px, transparent 20px, transparent 10px);
+  background-blend-mode: multiply;
+}

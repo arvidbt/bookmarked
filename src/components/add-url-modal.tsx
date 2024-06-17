@@ -88,7 +88,7 @@ export function AddUrlModal() {
             </FormItem>
           )}
         />
-        <Button className="float-right bg-red-500" type="submit">
+        <Button className="float-right bg-green-500" type="submit">
           Submit
         </Button>
       </form>

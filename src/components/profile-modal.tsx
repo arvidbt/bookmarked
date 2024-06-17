@@ -85,7 +85,7 @@ export function ProfileModal() {
       <p className="mt-4">🚨 Danger Zone</p>
       <div className="flex flex-row items-center justify-between gap-4 rounded-lg border  p-4">
         <p>Delete your account and all its associated data.</p>
-        <Button className="rounded-lg border border-red-500 bg-background text-red-500 hover:bg-red-500 hover:text-white">
+        <Button className="rounded-lg border border-red-500 bg-background text-red-500 hover:bg-green-500 hover:text-white">
           Delete account
         </Button>
       </div>
@@ -104,7 +104,7 @@ export function ProfileModal() {
               </FormItem>
             )}
           />
-          <Button className="float-right bg-red-500" type="submit">
+          <Button className="float-right bg-green-500" type="submit">
             Submit
           </Button>
         </form>

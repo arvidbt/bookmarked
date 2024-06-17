@@ -4,6 +4,12 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const pageMetadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'foldrr',
+  title: 'foldermates',
   description: 'Make bookmarking simpler.',
 }
+
+// foldrr
+// keeptag -> keeptag.me
+// foldermates -> foldermat.es
+
+// foldermat.es/arvid/

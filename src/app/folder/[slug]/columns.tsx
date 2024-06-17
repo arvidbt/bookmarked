@@ -46,7 +46,7 @@ export const columns: ColumnDef<DatatableUrl>[] = [
       return (
         <div className="flex items-center justify-between">
           <Link href={value} target="_blank">
-            <div className="max-w-sm items-center justify-center truncate text-left font-medium decoration-red-500 decoration-2 underline-offset-4 hover:underline">
+            <div className="max-w-sm items-center justify-center truncate text-left font-medium decoration-green-500 decoration-2 underline-offset-4 hover:underline">
               {value}
             </div>
           </Link>
@@ -64,7 +64,7 @@ export const columns: ColumnDef<DatatableUrl>[] = [
         <div className="flex flex-wrap gap-2 text-left font-medium">
           {value.map((t) => (
             <div
-              className="rounded-lg bg-red-100 p-1 px-2 text-sm font-semibold text-red-800"
+              className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
               key={t}
             >
               {t}

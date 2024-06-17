@@ -45,7 +45,7 @@ export function FollowFolderModal() {
   return (
     <Dialog>
       <DialogTrigger>
-        <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white hover:bg-red-500">
+        <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -86,7 +86,10 @@ export function FollowFolderModal() {
                 </FormItem>
               )}
             />
-            <Button className="float-right bg-red-500" type="submit">
+            <Button
+              className="float-right bg-green-600 hover:bg-green-500"
+              type="submit"
+            >
               Submit
             </Button>
           </form>

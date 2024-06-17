@@ -9,6 +9,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import useSupabaseServer from '@/hooks/use-supabase-server'
+import { urlPaths } from '@/utils/paths'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 async function getData(): Promise<DatatableUrl[]> {
   // Fetch data from your API here.
@@ -34,16 +38,18 @@ async function getData(): Promise<DatatableUrl[]> {
   ]
 }
 
-export default async function DemoPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const data = await getData()
+export default async function Folder({ params }: { params: { slug: string } }) {
+  const mockedData = await getData()
+
+  const supabase = useSupabaseServer(cookies())
+  const { data, error } = await supabase.auth.getUser()
+  if (error || !data?.user) {
+    redirect(urlPaths.HOME)
+  }
 
   return (
     <>
-      {data.length > 0 ? (
+      {mockedData.length > 0 ? (
         // If there is data, rended datatable
         <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
           <div className="mx-auto flex max-w-7xl grow flex-col py-6">
@@ -57,7 +63,7 @@ export default async function DemoPage({
 
               <Dialog>
                 <DialogTrigger>
-                  <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white">
+                  <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 448 512"
@@ -83,7 +89,7 @@ export default async function DemoPage({
             </div>
             <div className="flex grow flex-col">
               <div className="p-4">
-                <DataTable columns={columns} data={data} />
+                <DataTable columns={columns} data={mockedData} />
               </div>
             </div>
           </div>
@@ -106,7 +112,7 @@ export default async function DemoPage({
                   </p>
                 </div>
               </div>
-              <span className="flex items-center gap-2 rounded-lg bg-red-600 p-2 text-white">
+              <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"

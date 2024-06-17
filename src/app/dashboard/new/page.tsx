@@ -259,7 +259,7 @@ export default function InputForm() {
                   </div>
                   <div className="flex items-end justify-end">
                     <Button
-                      className="rounded-lg bg-red-500 hover:bg-red-600"
+                      className="rounded-lg bg-green-500 hover:bg-green-600"
                       type="submit"
                     >
                       Create folder

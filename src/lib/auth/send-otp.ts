@@ -10,8 +10,15 @@ export async function sendOTP(email: string) {
     email: email,
     options: {
       emailRedirectTo: '/dashboard',
+      shouldCreateUser: true,
+      data: {
+        username: email.split('@')[0],
+      },
     },
   })
+
+  console.log(data)
+  console.log(error)
 
   return data
 }

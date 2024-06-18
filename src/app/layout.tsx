@@ -22,6 +22,7 @@ export default function RootLayout({
       className={GeistSans.className}
       style={{ colorScheme: 'dark' }}
     >
+      <link rel="icon" href="/icon.ico" sizes="any" />
       <body className="bg-background text-foreground">
         <NextTopLoader showSpinner={false} height={4} color="#FFEB3B" />
         <ThemeProvider attribute="class" disableTransitionOnChange>

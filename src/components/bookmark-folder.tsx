@@ -14,21 +14,7 @@ import Link from 'next/link'
 import { Progress } from './ui/progress'
 import { useEffect, useState } from 'react'
 import { urlPaths } from '@/utils/paths'
-import { cn } from '@/utils/tailwind'
-
-const BookmarkFolderSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string().max(20),
-  icon: z.string().emoji().optional(),
-  usedQuota: z.number().nonnegative(),
-  userQuota: z.number().nonnegative(),
-  bucketQuota: z.number().nonnegative(),
-  publicFolder: z.boolean(),
-  description: z.string().max(255).optional(),
-  tags: z.array(z.string().max(12)).optional(),
-})
-
-type BookmarkProps = z.infer<typeof BookmarkFolderSchema>
+import { FolderProps } from '@/lib/schemas'
 
 function calculatePercentage(part: number, total: number): number {
   if (total === 0) {
@@ -42,21 +28,10 @@ export const BookmarkFolder = ({
   id,
   title,
   icon,
-  usedQuota,
-  userQuota,
-  bucketQuota,
-  publicFolder,
-  description,
+  public_folder: publicFolder,
+  folder_description: description,
   tags,
-}: BookmarkProps) => {
-  const quotaUsedPercentage = calculatePercentage(usedQuota, bucketQuota)
-
-  const [progress, setProgress] = useState(0)
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(quotaUsedPercentage), 200)
-    return () => clearTimeout(timer)
-  }, [quotaUsedPercentage])
-
+}: FolderProps) => {
   return (
     <>
       <Link
@@ -66,22 +41,12 @@ export const BookmarkFolder = ({
         <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-green-50/30">
           <CardHeader>
             <CardTitle className="flex justify-between">
-              <div>
+              <div className="text-xl">
                 {icon ? icon : '📁'}&nbsp;
                 {title}
               </div>
               <div>{publicFolder ? <div>{'🔓'}</div> : '🔒'}</div>
             </CardTitle>
-            <Progress value={progress} className="" />
-            <CardDescription>
-              <span className="text-lg font-bold text-black">{usedQuota}</span>
-              <span>
-                &nbsp;/&nbsp;{bucketQuota}&nbsp;
-                {'URLs ('}
-                {quotaUsedPercentage}
-                {'%)'}
-              </span>
-            </CardDescription>
           </CardHeader>
           <CardContent>
             {description && (

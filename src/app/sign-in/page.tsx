@@ -49,12 +49,6 @@ export default function SignIn() {
       return verifyOTP(authCredentials)
     },
 
-    onError: () => {
-      toast({
-        title: 'Pin is invalid or have expired!',
-      })
-    },
-
     onSuccess: () => {
       toast({
         title: 'Pin successfully verified',

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 export default async function Index() {
   return (
-    <div className="flex h-screen w-full flex-1 flex-grow flex-col items-center justify-between px-16 pt-8">
+    <div className="flex h-screen max-w-7xl flex-1 flex-grow flex-col items-center justify-between px-16 pt-8">
       <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
         <div className="flex flex-col">
           <h1 className="pb-2 text-4xl font-bold lg:text-6xl">

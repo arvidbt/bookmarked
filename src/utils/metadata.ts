@@ -7,9 +7,3 @@ export const pageMetadata = {
   title: 'foldermates',
   description: 'Make bookmarking simpler.',
 }
-
-// foldrr
-// keeptag -> keeptag.me
-// foldermates -> foldermat.es
-
-// foldermat.es/arvid/

@@ -6,7 +6,7 @@ export default function Footer() {
       <div>
         {/* Desktop view */}
         <div className="h-px w-screen bg-border"></div>
-        <div className="mx-auto h-16 w-full max-w-7xl items-center justify-between gap-x-6 p-4 sm:flex lg:px-8">
+        <div className="mx-auto h-16 max-w-7xl  items-center justify-between gap-x-6 p-4 sm:flex xl:px-8">
           <div>
             <p className="float-right font-semibold">
               Made with ❤️ by{' '}

@@ -24,54 +24,38 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useGetUser } from '@/hooks/use-get-user'
+import { Folder } from '@/lib/schemas'
+import { useMutation } from '@tanstack/react-query'
+import { insertUserFolder } from '@/lib/db/insert-user-folder'
+import { FolderSchema } from '@/lib/schemas'
+import { revalidatePath } from 'next/cache'
+import { urlPaths } from '@/utils/paths'
+import { navigate } from '@/lib/actions/navigate'
 
 export default function InputForm() {
-  const FormSchema = z.object({
-    folder: z
-      .string()
-      .min(2, {
-        message: 'Folder must be at least 2 characters.',
-      })
-      .max(20, {
-        message: 'Folder must not be more than 20 characters',
-      }),
-    description: z
-      .string()
-      .max(255, {
-        message: 'Description must not exceed 255 characters',
-      })
-      .optional(),
-    folderVisibility: z.boolean(),
-    folderSize: z.number().nonnegative().min(1, {
-      message: 'Folder must be at least of size 1',
-    }),
-    icon: z.string().emoji().optional(),
-    passwordProtected: z.object({
-      protected: z.boolean(),
-      password: z
-        .string()
-        .min(12, {
-          message: 'Password needs to be at least 12 characters long',
-        })
-        .max(12, { message: 'Password must not exceed 12 characters long' })
-        .optional(),
-    }),
-  })
+  const user = useGetUser()
 
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      folder: '',
-      folderVisibility: false,
-      folderSize: 100,
-      icon: '📁',
-      passwordProtected: {
-        protected: false,
-      },
+  const insertMutation = useMutation({
+    mutationFn: (folder: Folder) => {
+      return insertUserFolder(folder)
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
+  const form = useForm<z.infer<typeof FolderSchema>>({
+    resolver: zodResolver(FolderSchema),
+    defaultValues: {
+      title: 'Unnamed folder',
+      public_folder: false,
+      icon: '📁',
+    },
+  })
+
+  function onSubmit(data: z.infer<typeof FolderSchema>) {
+    insertMutation.mutate(data)
+
+    navigate(urlPaths.DASHBOARD)
+
     toast({
       title: 'You submitted the following values:',
       description: (
@@ -98,11 +82,11 @@ export default function InputForm() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="w-full space-y-4"
                 >
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-3 gap-2">
                     <div className="col-span-2">
                       <FormField
                         control={form.control}
-                        name="folder"
+                        name="title"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Folder name *</FormLabel>
@@ -115,20 +99,6 @@ export default function InputForm() {
                         )}
                       />
                     </div>
-                    <FormField
-                      control={form.control}
-                      name="folderSize"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Folder size *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="100" {...field} />
-                          </FormControl>
-                          <FormDescription></FormDescription>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
                     <FormField
                       control={form.control}
                       name="icon"
@@ -186,7 +156,7 @@ export default function InputForm() {
 
                   <FormField
                     control={form.control}
-                    name="description"
+                    name="folder_description"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>
@@ -204,37 +174,11 @@ export default function InputForm() {
                       </FormItem>
                     )}
                   />
-                  {/* <div>
-                    <FormField
-                      control={form.control}
-                      name="passwordProtected"
-                      render={({ field }) => (
-                        <FormItem className="items-center justify-between gap-4 rounded-lg border p-4 ">
-                          <div className="space-y-0.5">
-                            <FormLabel className="text-base">
-                              Want to protected your folder with a password?
-                            </FormLabel>
-                            <FormDescription>
-                              A password protected folder can improve your
-                              privacy and further protect your links.
-                            </FormDescription>
-                          </div>
-                          <FormControl>
-                            <Switch
-                              checked={field.value.protected}
-                              onCheckedChange={field.onChange}
-                              aria-readonly
-                            />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    />
-                  </div> */}
 
                   <div>
                     <FormField
                       control={form.control}
-                      name="folderVisibility"
+                      name="public_folder"
                       render={({ field }) => (
                         <FormItem className="flex flex-row items-center justify-between gap-4 rounded-lg border p-4">
                           <div className="space-y-0.5">

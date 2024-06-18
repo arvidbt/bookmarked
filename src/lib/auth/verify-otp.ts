@@ -12,7 +12,6 @@ const VerifyOTPSchema = z.object({
 type Props = z.infer<typeof VerifyOTPSchema>
 
 export async function verifyOTP({ email, token }: Props) {
-  console.log('Verify')
   const cookieStore = cookies()
   const supabase = createServerClient(cookieStore)
   const {

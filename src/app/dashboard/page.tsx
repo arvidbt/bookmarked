@@ -1,37 +1,18 @@
 import { BookmarkFolder } from '@/components/bookmark-folder'
 import { FollowFolderModal } from '@/components/follow-folder-modal'
 import Link from 'next/link'
-import { randomUUID } from 'crypto'
 import { z } from 'zod'
 import { urlPaths } from '@/utils/paths'
 import useSupabaseServer from '@/hooks/use-supabase-server'
 import { cookies } from 'next/headers'
 import { revalidatePath } from 'next/cache'
-import { NextResponse } from 'next/server'
 import { redirect } from 'next/navigation'
-import { useGetUserFolders } from '@/hooks/use-get-user-folders'
 import { getUserFolders } from '@/lib/db/get-user-folders'
-import { pageMetadata } from '@/utils/metadata'
-import { getUserProfile } from '@/lib/db/get-user-profile'
-
-const FolderSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string(),
-  icon: z.string().emoji().optional(),
-  usedQuota: z.number().nonnegative(),
-  userQuota: z.number().nonnegative(),
-  bucketQuota: z.number().nonnegative(),
-  description: z.string().optional(),
-  publicFolder: z.boolean(),
-  tags: z.array(z.string()),
-  passwordProtected: z.boolean().optional(),
-})
 
 export default async function Dashboard() {
   const supabase = useSupabaseServer(cookies())
   const { data, error } = await supabase.auth.getUser()
   const userFolders = await getUserFolders()
-  const userProfile = await getUserProfile()
   const followedFolders: string | any[] = []
 
   if (error || !data?.user) {
@@ -46,9 +27,8 @@ export default async function Dashboard() {
     followedFolders.length === 0
 
   return (
-    <div className="flex w-full sm:h-[calc(100vh-6rem-1px)]">
-      {userProfile && userProfile.username !== null}
-      <div className="mx-auto flex max-w-7xl grow flex-col py-6">
+    <div className="flex w-full p-8 sm:h-[calc(100vh-6rem-1px)]">
+      <div className="mx-auto flex max-w-7xl grow flex-col rounded-xl border bg-background py-6">
         {!displayGreeting && (
           <div className="flex grow flex-col">
             <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
@@ -84,7 +64,21 @@ export default async function Dashboard() {
                   userFolders.map((f) => <BookmarkFolder key={f.id} {...f} />)}
               </ul>
             </div>
-            <div className="flex w-full items-center justify-between gap-4 px-6 py-6 md:flex-row">
+            <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
+              <div>
+                <h2 className="text-2xl font-bold">Followed Folders</h2>
+              </div>
+              <FollowFolderModal />
+            </div>
+            <div>
+              <ul className="flex w-full flex-col items-center justify-center gap-2 overflow-y-auto p-6 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
+                {followedFolders &&
+                  followedFolders.map((f) => (
+                    <BookmarkFolder key={f.id} {...f} />
+                  ))}
+              </ul>
+            </div>
+            {/* <div className="flex w-full items-center justify-between gap-4 px-6 py-6 md:flex-row">
               <div>
                 <h2 className="text-2xl font-bold">Followed Folders</h2>
                 <div>
@@ -93,13 +87,21 @@ export default async function Dashboard() {
                     bookmark folder to see it here!
                   </p>
                 </div>
+                <div>
+                  <ul className="flex w-full flex-col items-center justify-center gap-2 overflow-y-auto p-6 md:grid md:grid-cols-2 md:gap-2 lg:grid-cols-3">
+                    {userFolders &&
+                      userFolders.map((f) => (
+                        <BookmarkFolder key={f.id} {...f} />
+                      ))}
+                  </ul>
+                </div>
               </div>
               <FollowFolderModal />
-            </div>
+            </div> */}
           </div>
         )}
         {displayGreeting && (
-          <div className="flex min-h-full max-w-full flex-col items-center justify-center rounded-xl border py-6">
+          <div className="flex min-h-full max-w-full flex-col items-center justify-center py-6">
             <div className="flex flex-row justify-between gap-4">
               <Link href={urlPaths.NEW_FOLDER}>
                 <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 px-4 text-white hover:bg-green-500">
@@ -108,13 +110,7 @@ export default async function Dashboard() {
                   </span>
                 </span>
               </Link>
-              <Link href={urlPaths.NEW_FOLDER}>
-                <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 px-4 text-white hover:bg-green-500">
-                  <span className="hidden text-sm font-medium lg:block">
-                    Follow a public folder
-                  </span>
-                </span>
-              </Link>
+              <FollowFolderModal />
             </div>
           </div>
         )}

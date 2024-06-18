@@ -14,21 +14,9 @@ import {
 import { z } from 'zod'
 import Link from 'next/link'
 import { CopyButton } from '@/components/copy-button'
+import { Bookmark } from '@/lib/schemas'
 
-const DatatableUrlSchema = z.object({
-  id: z.string().uuid(),
-  title: z.string().max(32, {
-    message: 'Title cannot exceed 32 characters',
-  }),
-  url: z.string().url(),
-  tags: z.array(z.string()).max(4, {
-    message: 'Maximum number of tags is 4',
-  }),
-})
-
-export type DatatableUrl = z.infer<typeof DatatableUrlSchema>
-
-export const columns: ColumnDef<DatatableUrl>[] = [
+export const columns: ColumnDef<Bookmark>[] = [
   {
     accessorKey: 'title',
     header: () => <div className="text-left">Title</div>,
@@ -38,42 +26,42 @@ export const columns: ColumnDef<DatatableUrl>[] = [
     },
   },
   {
-    accessorKey: 'url',
+    accessorKey: 'url_entry',
     header: () => <div className="text-left">URL</div>,
     cell: ({ row }) => {
-      const value = z.string().url().parse(row.getValue('url'))
+      const value = z.string().url().parse(row.getValue('url_entry'))
 
       return (
         <div className="flex items-center justify-between">
           <Link href={value} target="_blank">
-            <div className="max-w-sm items-center justify-center truncate text-left font-medium decoration-green-500 decoration-2 underline-offset-4 hover:underline">
+            <div className="max-w-lg items-center justify-center truncate text-left font-medium decoration-green-500 decoration-2 underline-offset-4 hover:underline">
               {value}
             </div>
           </Link>
-          <CopyButton value={value} text="📋" />
         </div>
       )
     },
   },
-  {
-    accessorKey: 'tags',
-    header: () => <div className="text-left">Tags</div>,
-    cell: ({ row }) => {
-      const value = z.array(z.string()).parse(row.getValue('tags'))
-      return (
-        <div className="flex flex-wrap gap-2 text-left font-medium">
-          {value.map((t) => (
-            <div
-              className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
-              key={t}
-            >
-              {t}
-            </div>
-          ))}
-        </div>
-      )
-    },
-  },
+  // {
+  //   accessorKey: 'tags',
+  //   header: () => <div className="text-left">Tags</div>,
+  //   cell: ({ row }) => {
+  //     const value = z.string().parse(row.getValue('tags'))
+  //     return (
+  //       <div className="flex flex-wrap gap-2 text-left font-medium">
+  //         {value.length > 0 &&
+  //           value.split(',').map((t, i) => (
+  //             <div
+  //               className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
+  //               key={i}
+  //             >
+  //               {t.trim()}
+  //             </div>
+  //           ))}
+  //       </div>
+  //     )
+  //   },
+  // },
   {
     accessorKey: 'id',
     header: () => <div className="rounded-lg text-right font-medium"></div>,

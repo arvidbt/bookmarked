@@ -1,28 +1,16 @@
 'use client'
 
-import { z } from 'zod'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
 
 import Link from 'next/link'
-import { Progress } from './ui/progress'
-import { useEffect, useState } from 'react'
 import { urlPaths } from '@/utils/paths'
 import { FolderProps } from '@/lib/schemas'
-
-function calculatePercentage(part: number, total: number): number {
-  if (total === 0) {
-    throw new Error('Total cannot be zero.')
-  }
-  const percentage = (part / total) * 100
-  return parseFloat(percentage.toFixed(1))
-}
 
 export const BookmarkFolder = ({
   id,
@@ -41,9 +29,9 @@ export const BookmarkFolder = ({
         <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-green-50/30">
           <CardHeader>
             <CardTitle className="flex justify-between">
-              <div className="text-xl">
-                {icon ? icon : '📁'}&nbsp;
-                {title}
+              <div className="flex gap-1 text-xl">
+                <p>{icon ? icon : '📁'}&nbsp;</p>
+                <h3>{title}</h3>
               </div>
               <div>{publicFolder ? <div>{'🔓'}</div> : '🔒'}</div>
             </CardTitle>

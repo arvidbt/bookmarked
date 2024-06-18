@@ -15,17 +15,16 @@ import { useGetUser } from '@/hooks/use-get-user'
 import { useToast } from '../ui/use-toast'
 import { useMutation } from '@tanstack/react-query'
 import { signOut } from '@/lib/auth/sign-out-user'
-import { revalidatePath } from 'next/cache'
 import { ProfileModal } from '../profile-modal'
 import { urlPaths } from '@/utils/paths'
-import { NextResponse } from 'next/server'
+import { navigate } from '@/lib/actions/navigate'
 
 export function SignedIn() {
   const { data } = useGetUser()
   const { toast } = useToast()
 
   const signOutMutation = useMutation({
-    mutationFn: () => {
+    mutationFn: (id: string) => {
       return signOut()
     },
 
@@ -33,8 +32,6 @@ export function SignedIn() {
       toast({
         title: `Signed out`,
       })
-      revalidatePath(urlPaths.LOGIN, 'page')
-      return NextResponse.redirect(new URL(urlPaths.LOGIN))
     },
   })
 
@@ -45,19 +42,10 @@ export function SignedIn() {
           <DropdownMenuTrigger>
             {' '}
             <Avatar>
-              <AvatarImage src="https://githubs.com/shadcn.png" />
               <AvatarFallback>🧑</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>
-              <div className="">
-                <p className="font-medium">{''}</p>
-                <p className="font-light text-gray-500">{'user.data.email'}</p>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-
             <DialogTrigger className="w-full">
               <DropdownMenuItem>🧑 Profile</DropdownMenuItem>
             </DialogTrigger>
@@ -65,7 +53,13 @@ export function SignedIn() {
             <Link href={urlPaths.BILLING}>
               <DropdownMenuItem>💳 Billing</DropdownMenuItem>
             </Link>
-            <DropdownMenuItem onClick={() => signOutMutation.mutate()}>
+            <DropdownMenuItem
+              onClick={() =>
+                signOutMutation.mutate(data.id, {
+                  onSettled: () => navigate(urlPaths.LOGIN),
+                })
+              }
+            >
               🚪 Logout
             </DropdownMenuItem>
           </DropdownMenuContent>

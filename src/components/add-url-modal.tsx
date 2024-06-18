@@ -15,33 +15,33 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { toast } from '@/components/ui/use-toast'
+import { Bookmark, BookmarkSchema } from '@/lib/schemas'
+import { insertUserUrl } from '@/lib/db/insert-user-url'
+import { useMutation } from '@tanstack/react-query'
+import { navigate } from '@/lib/actions/navigate'
+import { urlPaths } from '@/utils/paths'
 
-const FormSchema = z.object({
-  title: z.string().min(2, {
-    message: 'Title must be at least 2 characters.',
-  }),
-  url: z.string().url(),
-  tags: z.string().optional(),
-})
+type Props = {
+  folderId: string
+}
 
-export function AddUrlModal() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      title: '',
-      url: '',
+export function AddUrlModal({ folderId }: Props) {
+  const insertMutation = useMutation({
+    mutationFn: (bookmark: Bookmark) => {
+      return insertUserUrl(bookmark)
     },
   })
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  const form = useForm<z.infer<typeof BookmarkSchema>>({
+    resolver: zodResolver(BookmarkSchema),
+    defaultValues: {
+      id: folderId,
+    },
+  })
+
+  function onSubmit(data: z.infer<typeof BookmarkSchema>) {
+    insertMutation.mutate(data, {
+      onSettled: () => navigate(`${urlPaths.FOLDER}/${folderId}`),
     })
   }
 
@@ -63,7 +63,7 @@ export function AddUrlModal() {
         />
         <FormField
           control={form.control}
-          name="url"
+          name="url_entry"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Url</FormLabel>
@@ -74,7 +74,7 @@ export function AddUrlModal() {
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="tags"
           render={({ field }) => (
@@ -87,7 +87,7 @@ export function AddUrlModal() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <Button className="float-right bg-green-500" type="submit">
           Submit
         </Button>

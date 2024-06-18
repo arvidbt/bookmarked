@@ -52,17 +52,8 @@ export default function InputForm() {
   })
 
   function onSubmit(data: z.infer<typeof FolderSchema>) {
-    insertMutation.mutate(data)
-
-    navigate(urlPaths.DASHBOARD)
-
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    insertMutation.mutate(data, {
+      onSettled: () => navigate(urlPaths.DASHBOARD),
     })
   }
 
@@ -186,12 +177,12 @@ export default function InputForm() {
                               Is your folder public?
                             </FormLabel>
                             <FormDescription>
-                              ⚠️ Public folders can be accessed by anyone. This
-                              cannot be changed once created.
+                              ⚠️ Public folders can be followed by anyone.
                             </FormDescription>
                           </div>
                           <FormControl>
                             <Switch
+                              className="bg-green-500"
                               checked={field.value}
                               onCheckedChange={field.onChange}
                               aria-readonly

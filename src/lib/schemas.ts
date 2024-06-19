@@ -59,7 +59,6 @@ export const BookmarkSchema = z.object({
     message: 'Title cannot exceed 64 characters',
   }),
   url_entry: z.string().url(),
-  // tags: z.string().nullish(),
 })
 
 export type Bookmark = z.infer<typeof BookmarkSchema>

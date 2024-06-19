@@ -2,16 +2,9 @@
 
 import { createServerClient } from '@/utils/supabase'
 import { cookies } from 'next/headers'
-import { z } from 'zod'
+import { AuthCredentials } from '../schemas/auth-schemas'
 
-const VerifyOTPSchema = z.object({
-  email: z.string().email(),
-  token: z.string().min(6).max(6),
-})
-
-type Props = z.infer<typeof VerifyOTPSchema>
-
-export async function verifyOTP({ email, token }: Props) {
+export async function verifyOTP({ email, token }: AuthCredentials) {
   const cookieStore = cookies()
   const supabase = createServerClient(cookieStore)
   const {

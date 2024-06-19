@@ -8,6 +8,8 @@ import ReactQueryProvider from '@/providers/ReactQueryProvider'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/toaster'
 import { pageMetadata } from '@/utils/metadata'
+import { Bricolage_Grotesque } from 'next/font/google'
+import { cn } from '@/utils/tailwind'
 
 export const metadata = { ...pageMetadata }
 
@@ -19,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={GeistSans.className}
+      className={cn(GeistSans.className)}
       style={{ colorScheme: 'dark' }}
     >
       <link rel="icon" href="/icon.ico" sizes="any" />

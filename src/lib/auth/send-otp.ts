@@ -6,7 +6,7 @@ import { cookies } from 'next/headers'
 export async function sendOTP(email: string) {
   const cookieStore = cookies()
   const supabase = createServerClient(cookieStore)
-  const { data, error } = await supabase.auth.signInWithOtp({
+  return await supabase.auth.signInWithOtp({
     email: email,
     options: {
       emailRedirectTo: '/dashboard',
@@ -16,9 +16,4 @@ export async function sendOTP(email: string) {
       },
     },
   })
-
-  console.log(data)
-  console.log(error)
-
-  return data
 }

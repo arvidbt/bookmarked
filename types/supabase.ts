@@ -104,6 +104,38 @@ export type Database = {
           },
         ]
       }
+      urls: {
+        Row: {
+          folder_id: string | null
+          id: number
+          tags: string | null
+          title: string | null
+          url_entry: string | null
+        }
+        Insert: {
+          folder_id?: string | null
+          id?: never
+          tags?: string | null
+          title?: string | null
+          url_entry?: string | null
+        }
+        Update: {
+          folder_id?: string | null
+          id?: never
+          tags?: string | null
+          title?: string | null
+          url_entry?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'urls_folder_id_fkey'
+            columns: ['folder_id']
+            isOneToOne: false
+            referencedRelation: 'folders'
+            referencedColumns: ['id']
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -14,5 +14,5 @@ export function useGetFolder(id: string) {
     return
   }
 
-  return data[0] as Folder
+  return data
 }

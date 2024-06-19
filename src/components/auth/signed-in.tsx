@@ -15,15 +15,14 @@ import { useGetUser } from '@/hooks/use-get-user'
 import { useToast } from '../ui/use-toast'
 import { useMutation } from '@tanstack/react-query'
 import { signOut } from '@/lib/auth/sign-out-user'
-import { ProfileModal } from '../profile-modal'
 import { urlPaths } from '@/utils/paths'
-import { navigate } from '@/lib/actions/navigate'
+import { navigate } from '@/utils/navigate'
 
 export function SignedIn() {
   const { data } = useGetUser()
   const { toast } = useToast()
 
-  const signOutMutation = useMutation({
+  const signout = useMutation({
     mutationFn: (id: string) => {
       return signOut()
     },
@@ -55,7 +54,7 @@ export function SignedIn() {
             </Link>
             <DropdownMenuItem
               onClick={() =>
-                signOutMutation.mutate(data.id, {
+                signout.mutate(data.id, {
                   onSettled: () => navigate(urlPaths.LOGIN),
                 })
               }
@@ -64,9 +63,6 @@ export function SignedIn() {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <DialogContent>
-          <ProfileModal />
-        </DialogContent>
       </Dialog>
     </div>
   )

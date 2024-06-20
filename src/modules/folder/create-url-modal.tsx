@@ -39,7 +39,7 @@ export function CreateURLModal({ folderId }: Props) {
 
   function onSubmit(data: z.infer<typeof UrlSchema>) {
     insertMutation.mutate(data, {
-      onSettled: () => navigate(`folder/${folderId}`),
+      onSettled: () => navigate(`/folder/${folderId}`),
     })
   }
 

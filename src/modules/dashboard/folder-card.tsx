@@ -29,7 +29,7 @@ export const FolderCard = ({
       <Link href={`folder/${encodeURIComponent(id!)}`} className="h-full">
         <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-black/5">
           <CardHeader>
-            <CardTitle className="flex justify-between">
+            <CardTitle className="flex justify-between tracking-tighter">
               <div className="flex gap-1 text-xl">
                 <p>{icon ? icon : '📁'}&nbsp;</p>
                 <h3>{title}</h3>

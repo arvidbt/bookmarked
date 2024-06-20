@@ -13,7 +13,7 @@ export async function PopulatedDashboard({ folders }: { folders: Folder[] }) {
     <div className="flex grow flex-col">
       <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
         <div>
-          <h2 className="text-2xl font-bold">Your Folders</h2>
+          <h2 className="text-2xl font-bold tracking-tighter">Your Folders</h2>
           <p className="text-sm font-medium text-gray-500">
             Total folders: <span className="font-bold ">{folders.length}</span>
           </p>
@@ -27,7 +27,9 @@ export async function PopulatedDashboard({ folders }: { folders: Folder[] }) {
       <UserFoldersList folders={folders} />
       <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
         <div>
-          <h2 className="text-2xl font-bold">Followed Folders</h2>
+          <h2 className="text-2xl font-bold tracking-tighter">
+            Followed Folders
+          </h2>
         </div>
       </div>
       <FollowedFoldersList />

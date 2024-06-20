@@ -17,7 +17,7 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'foldermates',
+  title: 'Folders',
   description: 'Make bookmarking simpler.',
 }
 

@@ -82,7 +82,10 @@ export function FolderForm({
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-4 tracking-tighter"
+      >
         <div className="grid grid-cols-3 gap-2">
           <div className="col-span-2">
             <FormField
@@ -203,7 +206,10 @@ export function FolderForm({
           />
         </div>
         <div className="flex items-end justify-end">
-          <Button className="rounded-lg bg-black hover:bg-black" type="submit">
+          <Button
+            className="rounded-lg bg-black hover:bg-black tracking-tight"
+            type="submit"
+          >
             {title}
           </Button>
         </div>

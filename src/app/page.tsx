@@ -4,9 +4,9 @@ import Image from 'next/image'
 export default async function Index() {
   return (
     <div className="flex h-screen max-w-7xl flex-1 flex-grow flex-col items-center justify-between px-16 pt-8">
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
-        <div className="flex flex-col">
-          <h1 className="pb-2 text-4xl font-bold lg:text-6xl">
+      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 p-10">
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="pb-2 text-4xl font-bold lg:text-6xl tracking-tighter">
             <span className="font-black">Keep track</span> of{' '}
           </h1>
           <div className="text-4xl font-bold">
@@ -21,19 +21,19 @@ export default async function Index() {
                 </ul>
               </span>
             </div>
-            <h2 className="text-4xl font-black  decoration-dashed decoration-4 underline-offset-2 lg:text-6xl">
+            <h2 className="text-4xl font-black decoration-dashed decoration-4 underline-offset-2 lg:text-6xl backdrop-invert inline-block text-destructive-foreground p-2 rounded-md">
               bookmarks
             </h2>
             <br />
           </div>
-          <p className="pt-2 font-medium text-gray-500">
+          <p className="pt-2 font-medium text-gray-500 tracking-tighter">
             * Only shared folders can be followed.
           </p>
         </div>
         <div className="flex flex-col items-center justify-center">
           <div>
-            <ul className="text-lg font-bold">
-              <li className="flex items-center justify-start gap-2">
+            <ul className="text-lg font-bold tracking-tighter">
+              <li className="flex items-center justify-start gap-2 tracking-tighter">
                 <div className="">
                   <svg
                     stroke="currentColor"
@@ -49,7 +49,7 @@ export default async function Index() {
                 </div>
                 Keep track of bookmarks across devices
               </li>
-              <li className="flex items-center justify-start gap-2">
+              <li className="flex items-center justify-start gap-2 tracking-tighter">
                 <div className="">
                   <svg
                     stroke="currentColor"
@@ -65,7 +65,7 @@ export default async function Index() {
                 </div>
                 Easily share folders of bookmarks
               </li>
-              <li className="flex items-center justify-start gap-2">
+              <li className="flex items-center justify-start gap-2 tracking-tighter">
                 <div className="">
                   <svg
                     stroke="currentColor"

@@ -47,7 +47,7 @@ export function SubmitEmailForm() {
               <FormControl>
                 <Input placeholder="example@mail.com" {...field} />
               </FormControl>
-              <FormDescription>
+              <FormDescription className="tracking-tighter">
                 If the mail does not show up, be sure to check your junkmail.
               </FormDescription>
               <FormMessage />

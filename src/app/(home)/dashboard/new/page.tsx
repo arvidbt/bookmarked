@@ -7,7 +7,7 @@ export default async function CreateNewFolder() {
         <div className="mx-auto flex max-w-md flex-col items-center justify-center py-6">
           <div className="flex grow flex-col items-center">
             <div>
-              <h1 className="text-2xl font-extrabold">
+              <h1 className="text-2xl font-extrabold tracking-tight">
                 {"Let's create your new folder"}
               </h1>
             </div>

@@ -50,6 +50,7 @@ export function DeleteFolderForm({ folderId }: { folderId: string }) {
                 <FormItem>
                   <FormControl>
                     <Input
+                      className="tracking-tighter"
                       placeholder={'Confirm with ID of folder'}
                       {...field}
                     />
@@ -59,7 +60,7 @@ export function DeleteFolderForm({ folderId }: { folderId: string }) {
               )}
             />
           </div>
-          <Button className="col-span-1 rounded-lg border border-red-500 bg-background text-xs text-red-500 hover:bg-red-500 hover:text-white md:text-sm">
+          <Button className="col-span-1 rounded-lg border border-red-500 bg-background text-xs text-red-500 hover:bg-red-500 hover:text-white md:text-sm tracking-tighter">
             Delete Folder
           </Button>
         </div>

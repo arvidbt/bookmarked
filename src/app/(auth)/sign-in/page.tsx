@@ -24,7 +24,7 @@ export default function SignIn() {
               </SignInCard>
             )}
 
-            <p className="py-2 font-medium">
+            <p className="py-2 font-medium tracking-tighter">
               By signing in, you agree to our{' '}
               <span className="text-blue-400 underline">Terms of Service</span>
             </p>

@@ -13,9 +13,10 @@ export function FolderMenu({ folderId }: { folderId: string }) {
   return (
     <div className="flex w-full items-center justify-between gap-4 px-6 md:flex-row">
       <div>
-        <h2 className="text-2xl font-bold">Your Bookmarks</h2>
+        <h2 className="text-2xl font-bold tracking-tighter">Your Bookmarks</h2>
         <p className="font-medium text-gray-500">
-          Folder ID: <span className="text-black">{folderId}</span>
+          Folder ID:{' '}
+          <span className="text-black tracking-tighter">{folderId}</span>
         </p>
       </div>
 

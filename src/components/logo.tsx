@@ -1,7 +1,7 @@
 export function Logo() {
   return (
-    <div className="flex aspect-square rounded-lg border-2 border-green-600 ">
-      <div className="bg-green-600 p-2">
+    <div className="flex aspect-square rounded-lg border-2 border-black ">
+      <div className="bg-black p-2">
         <svg
           width="20"
           height="20"

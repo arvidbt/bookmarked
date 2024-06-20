@@ -21,7 +21,7 @@ export default async function Index() {
                 </ul>
               </span>
             </div>
-            <h2 className="text-4xl font-black text-green-600 decoration-dashed decoration-4 underline-offset-2 lg:text-6xl">
+            <h2 className="text-4xl font-black  decoration-dashed decoration-4 underline-offset-2 lg:text-6xl">
               bookmarks
             </h2>
             <br />
@@ -90,8 +90,8 @@ export default async function Index() {
             </a>
           </p> */}
         </div>
-        <div className="min-h-full min-w-full rounded-xl border border-green-600 bg-green-500/20 p-4 lg:col-span-2">
-          <div className="col-span-2 min-h-full min-w-full  border border-green-500 ">
+        <div className="min-h-full min-w-full rounded-xl border  p-4 shadow-md lg:col-span-2">
+          <div className="col-span-2 min-h-full min-w-full   ">
             <Image
               src={'/dashboard.png'}
               width={0}

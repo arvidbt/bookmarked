@@ -1,7 +1,6 @@
 import { UserFoldersList } from './user-folders-list'
 import { CreateFolderTrigger } from './create-folder-trigger'
 import { FollowedFoldersList } from './followed-folders-list'
-import { getUserFolders } from '@/lib/db/get-user-folders'
 import { FolderProps } from '@/lib/schemas'
 
 export async function PopulatedDashboard({

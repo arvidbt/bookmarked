@@ -1,8 +1,8 @@
 'use server'
 
 import { createServerClient } from '@/utils/supabase'
+import { Folder } from 'fm/types'
 import { cookies } from 'next/headers'
-import { Folder } from '../schemas'
 
 export async function getFolder(id: string) {
   const supabase = createServerClient(cookies())

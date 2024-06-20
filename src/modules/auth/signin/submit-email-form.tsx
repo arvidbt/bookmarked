@@ -1,23 +1,22 @@
 'use client'
 
-import { z } from 'zod'
 import {
-  FormField,
-  FormItem,
+  Form,
   FormControl,
   FormDescription,
+  FormField,
+  FormItem,
   FormMessage,
-  Form,
 } from '@/components/ui/form'
-
 import { Input } from '@/components/ui/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { sendOTP } from '@/lib/auth/send-otp'
-
 import { EmailFormSchema } from '@/lib/schemas/auth-schemas'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+
 import { TriggerSubmitEmail } from './trigger-submit-email'
-import { useRouter, useSearchParams } from 'next/navigation'
 
 export function SubmitEmailForm() {
   const router = useRouter()

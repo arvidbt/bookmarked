@@ -1,5 +1,5 @@
-import { UseQueryResult, useQuery } from '@tanstack/react-query'
 import { verifyOTP } from '@/lib/auth/verify-otp'
+import { useQuery } from '@tanstack/react-query'
 
 export function useVerifyOTP(email: string, token: string) {
   const data = useQuery({

@@ -3,11 +3,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog'
+
+import { CreateURLModal } from './create-url-modal'
 import { CreateURLTrigger } from './create-url-trigger'
 import { FolderSettingsButton } from './folder-settings-button'
-import { CreateURLModal } from './create-url-modal'
 
 export function FolderMenu({ folderId }: { folderId: string }) {
   return (

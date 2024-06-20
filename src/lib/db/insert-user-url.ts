@@ -1,10 +1,10 @@
 'use server'
 
 import { createServerClient } from '@/utils/supabase'
+import { URL } from 'fm/types'
 import { cookies } from 'next/headers'
-import { Bookmark } from '../schemas'
 
-export async function insertUserUrl(bookmark: Bookmark) {
+export async function insertUserUrl(bookmark: URL) {
   const supabase = createServerClient(cookies())
 
   await supabase.from('urls').insert({

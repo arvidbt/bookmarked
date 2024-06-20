@@ -4,17 +4,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  headers: () => [
-    {
-      source: '/dashboard',
-      headers: [
-        {
-          key: 'Cache-Control',
-          value: 'no-store',
-        },
-      ],
-    },
-  ],
+  headers: () => [],
 }
 
 module.exports = withBundleAnalyzer(nextConfig)

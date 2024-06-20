@@ -1,17 +1,16 @@
-import { urlPaths } from '@/utils/paths'
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
-import { PopulatedDashboard } from '@/modules/dashboard/populated-dashboard'
-import { EmptyDashboard } from '@/modules/dashboard/empty-dashboard'
 import { auth } from '@/lib/auth/auth'
 import { getUserFolders } from '@/lib/db/get-user-folders'
+import { EmptyDashboard } from '@/modules/dashboard/empty-dashboard'
+import { PopulatedDashboard } from '@/modules/dashboard/populated-dashboard'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 export default async function Dashboard() {
   const { data, error } = await auth()
 
   if (error || !data?.user) {
-    revalidatePath(urlPaths.LOGIN, 'page')
-    return redirect(urlPaths.LOGIN)
+    revalidatePath('sign-in', 'page')
+    return redirect('sign-in')
   }
 
   const folders = await getUserFolders()

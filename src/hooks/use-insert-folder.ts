@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query'
 import { insertUserFolder } from '@/lib/db/insert-user-folder'
-import { Folder } from '@/lib/schemas'
+import { useQuery } from '@tanstack/react-query'
+import { Folder } from 'fm/types'
 
 export function useInsertUserFolder(folder: Folder) {
   useQuery({

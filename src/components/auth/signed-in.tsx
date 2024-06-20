@@ -1,22 +1,20 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
-import Link from 'next/link'
 import { useGetUser } from '@/hooks/use-get-user'
-import { useToast } from '../ui/use-toast'
-import { useMutation } from '@tanstack/react-query'
 import { signOut } from '@/lib/auth/sign-out-user'
-import { urlPaths } from '@/utils/paths'
 import { navigate } from '@/utils/navigate'
+import { useMutation } from '@tanstack/react-query'
+import Link from 'next/link'
+
+import { useToast } from '../ui/use-toast'
 
 export function SignedIn() {
   const { data } = useGetUser()
@@ -49,13 +47,13 @@ export function SignedIn() {
               <DropdownMenuItem>🧑 Profile</DropdownMenuItem>
             </DialogTrigger>
 
-            <Link href={urlPaths.BILLING}>
+            <Link href={'/billing/'}>
               <DropdownMenuItem>💳 Billing</DropdownMenuItem>
             </Link>
             <DropdownMenuItem
               onClick={() =>
                 signout.mutate(data.id, {
-                  onSettled: () => navigate(urlPaths.LOGIN),
+                  onSettled: () => navigate('/sign-in'),
                 })
               }
             >

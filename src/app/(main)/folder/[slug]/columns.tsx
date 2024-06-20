@@ -1,7 +1,5 @@
 'use client'
 
-import { ColumnDef } from '@tanstack/react-table'
-import { MoreHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -11,11 +9,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { z } from 'zod'
+import { ColumnDef } from '@tanstack/react-table'
+import { URL } from 'fm/types'
+import { MoreHorizontal } from 'lucide-react'
 import Link from 'next/link'
-import { Bookmark } from '@/lib/schemas'
+import { z } from 'zod'
 
-export const columns: ColumnDef<Bookmark>[] = [
+export const columns: ColumnDef<URL>[] = [
   {
     accessorKey: 'title',
     header: () => <div className="text-left">Title</div>,
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Bookmark>[] = [
   //         {value.length > 0 &&
   //           value.split(',').map((t, i) => (
   //             <div
-  //               className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
+  //               className="rounded-lg bg-black p-1 px-2 text-sm font-semibold "
   //               key={i}
   //             >
   //               {t.trim()}

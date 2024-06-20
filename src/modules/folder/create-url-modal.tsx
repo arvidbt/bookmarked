@@ -1,25 +1,23 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
-
 import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Bookmark, BookmarkSchema } from '@/lib/schemas'
 import { insertUserUrl } from '@/lib/db/insert-user-url'
-import { useMutation } from '@tanstack/react-query'
+import { UrlSchema } from '@/lib/schemas/object-schemas'
 import { navigate } from '@/utils/navigate'
-import { urlPaths } from '@/utils/paths'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { URL } from 'fm/types'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 type Props = {
   folderId: string
@@ -27,21 +25,21 @@ type Props = {
 
 export function CreateURLModal({ folderId }: Props) {
   const insertMutation = useMutation({
-    mutationFn: (bookmark: Bookmark) => {
+    mutationFn: (bookmark: URL) => {
       return insertUserUrl(bookmark)
     },
   })
 
-  const form = useForm<z.infer<typeof BookmarkSchema>>({
-    resolver: zodResolver(BookmarkSchema),
+  const form = useForm<z.infer<typeof UrlSchema>>({
+    resolver: zodResolver(UrlSchema),
     defaultValues: {
       id: folderId,
     },
   })
 
-  function onSubmit(data: z.infer<typeof BookmarkSchema>) {
+  function onSubmit(data: z.infer<typeof UrlSchema>) {
     insertMutation.mutate(data, {
-      onSettled: () => navigate(`${urlPaths.FOLDER}/${folderId}`),
+      onSettled: () => navigate(`folder/${folderId}`),
     })
   }
 
@@ -88,7 +86,7 @@ export function CreateURLModal({ folderId }: Props) {
             </FormItem>
           )}
         /> */}
-        <Button className="float-right bg-green-500" type="submit">
+        <Button className="float-right bg-black" type="submit">
           Submit
         </Button>
       </form>

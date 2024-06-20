@@ -1,11 +1,10 @@
+import { auth } from '@/lib/auth/auth'
+import { getFolder } from '@/lib/db/get-folder'
+import { getUserUrls } from '@/lib/db/get-user-urls'
+import { FolderMenu } from '@/modules/folder/folder-menu'
+
 import { columns } from './columns'
 import { DataTable } from './data-table'
-import { urlPaths } from '@/utils/paths'
-import { redirect } from 'next/navigation'
-import { getUserUrls } from '@/lib/db/get-user-urls'
-import { getFolder } from '@/lib/db/get-folder'
-import { auth } from '@/lib/auth/auth'
-import { FolderMenu } from '@/modules/folder/folder-menu'
 
 export default async function Folder({ params }: { params: { slug: string } }) {
   const { data } = await auth()
@@ -18,7 +17,7 @@ export default async function Folder({ params }: { params: { slug: string } }) {
   }
 
   // if (folder && !(folder.user_id === data.user?.id) && !folder.public_folder) {
-  //   redirect(urlPaths.LOGIN)
+  //   redirect("/sign-in")
   // }
 
   return (

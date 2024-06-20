@@ -3,7 +3,7 @@ import { DialogTrigger } from '@/components/ui/dialog'
 export function CreateURLTrigger() {
   return (
     <DialogTrigger>
-      <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
+      <span className="flex items-center gap-2 rounded-lg bg-black p-2 text-white hover:bg-black">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"

@@ -1,13 +1,10 @@
-import { UserFoldersList } from './user-folders-list'
+import { Folder } from 'fm/types'
+
 import { CreateFolderTrigger } from './create-folder-trigger'
 import { FollowedFoldersList } from './followed-folders-list'
-import { FolderProps } from '@/lib/schemas'
+import { UserFoldersList } from './user-folders-list'
 
-export async function PopulatedDashboard({
-  folders,
-}: {
-  folders: FolderProps[]
-}) {
+export async function PopulatedDashboard({ folders }: { folders: Folder[] }) {
   if (!folders || folders.length === 0) {
     return null
   }
@@ -18,11 +15,13 @@ export async function PopulatedDashboard({
         <div>
           <h2 className="text-2xl font-bold">Your Folders</h2>
           <p className="text-sm font-medium text-gray-500">
-            Total folders:{' '}
-            <span className="font-bold text-green-600">{folders.length}</span>
+            Total folders: <span className="font-bold ">{folders.length}</span>
           </p>
         </div>
-        <CreateFolderTrigger title="Create new folder" />
+        <CreateFolderTrigger
+          title="Create new folder"
+          href={'/dashboard/new'}
+        />
       </div>
 
       <UserFoldersList folders={folders} />

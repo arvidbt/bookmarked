@@ -1,11 +1,9 @@
 'use client'
 
-import { pageMetadata } from '@/utils/metadata'
-import { urlPaths } from '@/utils/paths'
-import { SubmitEmailForm } from '@/modules/auth/signin/submit-email-form'
-import { useSearchParams } from 'next/navigation'
-import { VerifyEmailForm } from '@/modules/auth/signin/verify-email-form'
 import { SignInCard } from '@/modules/auth/signin/sign-in-card'
+import { SubmitEmailForm } from '@/modules/auth/signin/submit-email-form'
+import { VerifyEmailForm } from '@/modules/auth/signin/verify-email-form'
+import { useSearchParams } from 'next/navigation'
 
 export default function SignIn() {
   const searchParams = useSearchParams()

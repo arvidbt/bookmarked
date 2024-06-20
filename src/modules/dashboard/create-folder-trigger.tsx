@@ -1,10 +1,15 @@
-import { urlPaths } from '@/utils/paths'
 import Link from 'next/link'
 
-export async function CreateFolderTrigger({ title }: { title: string }) {
+export async function CreateFolderTrigger({
+  title,
+  href,
+}: {
+  title: string
+  href: string
+}) {
   return (
-    <Link href={urlPaths.NEW_FOLDER}>
-      <span className="flex items-center gap-2 rounded-lg bg-green-600 p-2 text-white hover:bg-green-500">
+    <Link href={href}>
+      <span className="flex items-center gap-2 rounded-lg bg-black p-2 text-white hover:bg-black">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 448 512"

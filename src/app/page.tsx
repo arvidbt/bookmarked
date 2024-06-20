@@ -34,7 +34,7 @@ export default async function Index() {
           <div>
             <ul className="text-lg font-bold">
               <li className="flex items-center justify-start gap-2">
-                <div className="text-green-500">
+                <div className="">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
@@ -50,7 +50,7 @@ export default async function Index() {
                 Keep track of bookmarks across devices
               </li>
               <li className="flex items-center justify-start gap-2">
-                <div className="text-green-500">
+                <div className="">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"
@@ -66,7 +66,7 @@ export default async function Index() {
                 Easily share folders of bookmarks
               </li>
               <li className="flex items-center justify-start gap-2">
-                <div className="text-green-500">
+                <div className="">
                   <svg
                     stroke="currentColor"
                     fill="currentColor"

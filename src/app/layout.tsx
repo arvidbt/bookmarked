@@ -1,17 +1,25 @@
-import { GeistSans } from 'geist/font/sans'
-import ThemeProvider from '@/providers/ThemeProvider'
-import NextTopLoader from 'nextjs-toploader'
-import { Analytics } from '@vercel/analytics/react'
-import './globals.css'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import ReactQueryProvider from '@/providers/ReactQueryProvider'
 import Header from '@/components/header'
 import { Toaster } from '@/components/ui/toaster'
-import { pageMetadata } from '@/utils/metadata'
-import { Bricolage_Grotesque } from 'next/font/google'
+import ReactQueryProvider from '@/providers/ReactQueryProvider'
+import ThemeProvider from '@/providers/ThemeProvider'
 import { cn } from '@/utils/tailwind'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { Analytics } from '@vercel/analytics/react'
+import { GeistSans } from 'geist/font/sans'
+import { Bricolage_Grotesque } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader'
 
-export const metadata = { ...pageMetadata }
+import './globals.css'
+
+const defaultUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : 'http://localhost:3000'
+
+export const metadata = {
+  metadataBase: new URL(defaultUrl),
+  title: 'foldermates',
+  description: 'Make bookmarking simpler.',
+}
 
 export default function RootLayout({
   children,
@@ -26,7 +34,7 @@ export default function RootLayout({
     >
       <link rel="icon" href="/icon.ico" sizes="any" />
       <body className="bg-background text-foreground">
-        <NextTopLoader showSpinner={false} height={4} color="#FFEB3B" />
+        <NextTopLoader showSpinner={false} height={2} color="#000" />
         <ThemeProvider attribute="class" disableTransitionOnChange>
           <ReactQueryProvider>
             <main className="flex min-h-screen flex-col items-center">

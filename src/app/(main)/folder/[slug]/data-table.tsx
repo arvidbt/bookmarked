@@ -1,13 +1,6 @@
 'use client'
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-
+import { DataTablePagination } from '@/components/data-table/pagination'
 import {
   Table,
   TableBody,
@@ -16,7 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { DataTablePagination } from '@/components/data-table/pagination'
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -59,7 +58,7 @@ export function DataTable<TData, TValue>({
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
-                className="hover:bg-green-50/20"
+                className="hover:bg-black/20"
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
               >

@@ -7,11 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-
-import Link from 'next/link'
-import { urlPaths } from '@/utils/paths'
-import { FolderProps } from '@/lib/schemas'
+import { Folder } from 'fm/types'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+
 export const FolderCard = ({
   id,
   title,
@@ -19,18 +18,16 @@ export const FolderCard = ({
   public_folder: publicFolder,
   folder_description: description,
   tags,
-}: FolderProps) => {
+}: Folder) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, y: -5 }}
       exit={{ opacity: 0 }}
+      className="w-full"
     >
-      <Link
-        href={`${urlPaths.FOLDER}${encodeURIComponent(id)}`}
-        className="h-full"
-      >
-        <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-green-50/30">
+      <Link href={`folder/${encodeURIComponent(id!)}`} className="h-full">
+        <Card className="flex h-full flex-col justify-between rounded-t-2xl hover:bg-black/5">
           <CardHeader>
             <CardTitle className="flex justify-between">
               <div className="flex gap-1 text-xl">
@@ -48,9 +45,9 @@ export const FolderCard = ({
           <CardFooter>
             <div className="inset-x-0  flex h-full grow gap-2">
               {tags &&
-                tags.map((t) => (
+                tags.split(',').map((t) => (
                   <div
-                    className="rounded-lg bg-green-100 p-1 px-2 text-sm font-semibold text-green-800"
+                    className="rounded-lg bg-black p-1 px-2 text-sm font-semibold "
                     key={t}
                   >
                     {t}

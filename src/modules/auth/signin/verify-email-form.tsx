@@ -1,33 +1,26 @@
 'use client'
 
-import { verifyOTP } from '@/lib/auth/verify-otp'
-import { useState } from 'react'
-import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
-  FormField,
-  FormItem,
+  Form,
   FormControl,
   FormDescription,
+  FormField,
+  FormItem,
   FormMessage,
-  Form,
 } from '@/components/ui/form'
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
 } from '@/components/ui/input-otp'
-import { Input } from '@/components/ui/input'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { sendOTP } from '@/lib/auth/send-otp'
-import { useMutation } from '@tanstack/react-query'
-import { navigate } from '@/utils/navigate'
-import { pageMetadata } from '@/utils/metadata'
-import { urlPaths } from '@/utils/paths'
-import { SubmitEmailForm } from '@/modules/auth/signin/submit-email-form'
-import { useSearchParams } from 'next/navigation'
+import { verifyOTP } from '@/lib/auth/verify-otp'
 import { AuthCredentials, TokenFormSchema } from '@/lib/schemas/auth-schemas'
+import { navigate } from '@/utils/navigate'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 export function VerifyEmailForm({ email }: { email: string }) {
   const verify = useMutation({
@@ -64,7 +57,6 @@ export function VerifyEmailForm({ email }: { email: string }) {
           name="token"
           render={({ field }) => (
             <FormItem className="flex w-full flex-col items-center justify-center">
-              {/* <FormLabel>One-Time Password</FormLabel> */}
               <FormControl>
                 <InputOTP maxLength={6} {...field}>
                   <InputOTPGroup>
@@ -86,7 +78,7 @@ export function VerifyEmailForm({ email }: { email: string }) {
         />
         <Button
           type="submit"
-          className="mt-10 w-full rounded-lg bg-green-600 p-2 px-4 font-black text-white hover:bg-green-500"
+          className="mt-10 w-full rounded-lg bg-black p-2 px-4 font-black text-white hover:bg-black"
         >
           Verify
         </Button>

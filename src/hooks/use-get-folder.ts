@@ -1,6 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { Folder } from '@/lib/schemas'
 import { getFolder } from '@/lib/db/get-folder'
+import { useQuery } from '@tanstack/react-query'
 
 export function useGetFolder(id: string) {
   const { data, error } = useQuery({

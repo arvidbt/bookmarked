@@ -1,3 +1,4 @@
+import { cn } from '@/utils/tailwind'
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -6,7 +7,6 @@ import {
 } from '@radix-ui/react-icons'
 import { Column } from '@tanstack/react-table'
 
-import { cn } from '@/utils/tailwind'
 import { Button } from '../ui/button'
 import {
   DropdownMenu,

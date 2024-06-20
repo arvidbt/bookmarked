@@ -3,5 +3,5 @@ create table if not exists followed_folders (
     user_id uuid references auth.users default auth.uid(),
     folder_id uuid,
 
-    foreign key (folder_id) references folders (id) on delete cascade
+    foreign key (folder_id) references folders (id) on delete cascade on update cascade
 );
